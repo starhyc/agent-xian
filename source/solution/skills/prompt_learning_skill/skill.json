@@ -1,0 +1,24 @@
+{
+  "name": "prompt_learning_skill",
+  "version": "1.0.0",
+  "description": "从训练集学习图片分类规则，对验证集进行推理",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "base_dir": {
+        "type": "string",
+        "description": "数据目录路径，包含训练集和验证集子目录"
+      }
+    },
+    "required": ["base_dir"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "answer": {
+        "type": "string",
+        "description": "格式化的推理结果，格式：1NOT_INVOLVED,2PASS,3FAIL,..."
+      }
+    }
+  }
+}

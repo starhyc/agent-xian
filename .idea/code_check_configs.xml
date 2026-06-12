@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CodeCheckProjectSettings">
+    <option name="asyncHistoryTask" value="true" />
+    <option name="branch" value="main" />
+    <option name="repoRuleSetIdsMap">
+      <map>
+        <entry key="https://github.com/starhyc/agent-xian.git">
+          <value>
+            <set>
+              <option value="025d82a1334c4b779af42a88fcf0e88e" />
+              <option value="0f384bbb269d444d93bc04b64c07f022" />
+              <option value="159bd9e83c294cb991f1bbb8bf3b8e9d" />
+              <option value="5d944820ce884f988cf70d9d104c6919" />
+              <option value="603c6d4b69cd4a0fa9a595da471aa998" />
+              <option value="913d74ed76bd47d08b7bae5e3a191f98" />
+              <option value="b065a47b2f5544d78810bdfa6962f877" />
+              <option value="c294ebf6cd4842eaa01e93df09fc60d9" />
+              <option value="db9527ee24e74d2db599ed3d95230018" />
+            </set>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="repoTaskIdsMap">
+      <map>
+        <entry key="https://github.com/starhyc/agent-xian.git" />
+      </map>
+    </option>
+    <option name="repositoryUrl" value="https://github.com/starhyc/agent-xian.git" />
+    <option name="selectedAllRemoteTasks" value="true" />
+    <option name="tempRepoUrl" value="https://github.com/starhyc/agent-xian.git" />
+  </component>
+</project>

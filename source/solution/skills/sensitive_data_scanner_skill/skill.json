@@ -1,0 +1,17 @@
+{
+  "name": "sensitive_data_scanner_skill",
+  "version": "1.0.0",
+  "description": "敏感信息扫描 - 扫描压缩包内所有文件中的敏感信息，支持多层嵌套和图片解析",
+  "input_schema": {
+    "scan_path": {
+      "type": "string",
+      "description": "压缩包或文件路径"
+    }
+  },
+  "output_schema": {
+    "answer": {
+      "type": "string",
+      "description": "格式为 手机号,邮箱,身份证,APIKey"
+    }
+  }
+}

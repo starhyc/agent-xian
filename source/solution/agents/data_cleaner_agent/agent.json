@@ -1,0 +1,7 @@
+{
+  "name": "data_cleaner_agent",
+  "description": "Cleans and normalizes structured data, removes duplicates, and computes summary statistics.",
+  "role": "Data Cleaning Specialist",
+  "entrypoint": "scripts/run.py",
+  "timeout_seconds": 60
+}

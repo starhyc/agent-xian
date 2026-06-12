@@ -1,0 +1,20 @@
+{
+	"taskProperties":[
+		{
+			"key":"pythonVersion",
+			"value":"python3"
+		},
+		{
+			"key":"generateJsonPath",
+			"value":""
+		},
+		{
+			"key":"policyFolderPath",
+			"value":""
+		},
+		{
+			"key":"searchFiles",
+			"value":""
+		}
+	]
+}

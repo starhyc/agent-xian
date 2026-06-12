@@ -1,0 +1,12 @@
+{
+  "name": "fse_qa",
+  "description": "IDE插件FSE数字人问答 - 根据人设、历史记录和Wiki资料回答问题",
+  "entrypoint": "scripts/run.py",
+  "input_schema": {
+    "data_dir": {
+      "type": "string",
+      "description": "数据文件目录路径"
+    }
+  },
+  "timeout_seconds": 120
+}

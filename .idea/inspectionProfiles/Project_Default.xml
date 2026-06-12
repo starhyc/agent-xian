@@ -1,0 +1,14 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="DangerJava" enabled="false" level="CodeMateErrorType" enabled_by_default="false" />
+    <inspection_tool class="DangerProperties" enabled="false" level="CodeMateErrorType" enabled_by_default="false" />
+    <inspection_tool class="DangerXml" enabled="false" level="CodeMateErrorType" enabled_by_default="false" />
+    <inspection_tool class="DangerYaml" enabled="false" level="CodeMateErrorType" enabled_by_default="false" />
+    <inspection_tool class="NginxConfig" enabled="false" level="CodeMateErrorType" enabled_by_default="false" />
+    <inspection_tool class="StructuredJava" enabled="false" level="CodeMateErrorType" enabled_by_default="false" />
+    <inspection_tool class="SuspiciousString" enabled="false" level="CodeMateErrorType" enabled_by_default="false" />
+    <inspection_tool class="UnsafeAnnotation" enabled="false" level="CodeMateErrorType" enabled_by_default="false" />
+    <inspection_tool class="UnsafeObject" enabled="false" level="CodeMateErrorType" enabled_by_default="false" />
+  </profile>
+</component>
