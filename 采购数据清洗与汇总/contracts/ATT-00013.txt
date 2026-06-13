@@ -1,0 +1,10 @@
+Contract No: CT-00013
+Related PO: PO-2026-00043
+Project Code: PRJ-SOF-2026-019
+Counterparty: Spruce SaaS
+Registered Entity: 云杉云软件有限公司
+Service Scope: monitoring platform subscription; API usage subscription; collaboration software seats; cloud software license
+Effective Period: 2026-01-01 至 2026-12-31
+
+Note: This contract text may be used to identify the supplier entity and procurement category.
+Amount Rule: contract value or budget cannot fill, overwrite, or overturn the system amount or invoice amount. Use the system record and valid invoice rules for amount decisions.
