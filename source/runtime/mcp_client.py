@@ -80,8 +80,25 @@ class LocalMCPClient:
         # the question's declared file paths (only text_read_file resolves paths
         # for free below).
         from source.runtime.tool_context import set_runtime_context
+        from source.runtime import debug_log
 
         set_runtime_context(runtime_context)
+        qid = str(runtime_context.get("question_id") or "")
+        started = debug_log.log_tool_start(name, args, question_id=qid)
+        try:
+            result = await self._dispatch(name, args, runtime_context)
+        except Exception as exc:
+            debug_log.log_tool_error(name, exc, started, question_id=qid)
+            raise
+        debug_log.log_tool_end(name, result, started, question_id=qid)
+        return result
+
+    async def _dispatch(
+        self,
+        name: str,
+        args: dict[str, Any],
+        runtime_context: dict[str, Any],
+    ) -> Any:
         allowed_tools = set(runtime_context.get("allowed_tools") or [])
         allowed_agents = set(runtime_context.get("allowed_agents") or [])
 
