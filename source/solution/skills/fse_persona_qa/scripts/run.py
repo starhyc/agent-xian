@@ -16,8 +16,14 @@ from source.solution.lib.llm import ask
 
 
 SELECT_SYSTEM = (
-    "你是资料检索选择器。给定一个用户问题和若干候选答案记录，"
-    "选出唯一一条最能正确、权威、贴合该问题的记录（优先最新且正确的指导，过滤无关/过时内容）。"
+    "你是 DevPilot IDE 插件 FSE 数字人「小维」的资料检索选择器。"
+    "给定一个用户问题和若干候选记录（来自 DB 历史记录或 Wiki 页面，每条带来源与时间），"
+    "选出唯一一条最能正确、权威、贴合该问题【当前有效口径】的记录。"
+    "判定原则：\n"
+    "1) 只处理 DevPilot IDE 插件域；排除其它产品/插件的记录（如 CodeReviewBot、浏览器插件、插件商城问题单、SSO 旧版等）。\n"
+    "2) 优先采用最新且仍然有效的处理口径；明确标注为旧版/归档/历史/试点/不再采用/曾经支持的记录一律不选。\n"
+    "3) 当 DB 与 Wiki 就同一主题在时间线上冲突时，选时间更新且为正式（非试点）的那条；若问题就是『现在还能不能这么做』，要选纠正性的当前口径，而非被纠正的旧做法。\n"
+    "4) 排除高风险错误做法：删除整个目录、关闭全部能力、直接重装、直接整体回滚、直接关闭企业代理/证书校验等表述通常是错误旧口径。\n"
     "只输出所选记录前面的编号数字，不要输出其它任何字符。"
 )
 
@@ -95,6 +101,8 @@ def _db_candidates():
             cands.append(
                 {
                     "cid": "DB#" + r["mid"],
+                    "src": "DB历史记录",
+                    "time": (r["created_at"] or "").strip(),
                     "topic": (r["title"] or "") + " " + (r["tags"] or "") + " " + (r["conv"] or ""),
                     "reply": (r["content"] or "").strip(),
                     "key": r["key"],
@@ -135,12 +143,15 @@ def _wiki_candidates(sa):
         data = page.get("data") if isinstance(page.get("data"), dict) else page
         faqs = data.get("faqs") or data.get("faq") or []
         title = data.get("title", "")
+        page_time = (data.get("updated_at") or data.get("page_updated_at") or "").strip()
         for faq in faqs:
             if not isinstance(faq, dict):
                 continue
             cands.append(
                 {
                     "cid": "WK#%s#%s" % (pid, faq.get("id", "")),
+                    "src": "Wiki页面",
+                    "time": page_time,
                     "topic": title + " " + str(faq.get("q", "")),
                     "reply": str(faq.get("a", "")).strip(),
                     "key": faq.get("service_action_key"),
@@ -161,10 +172,21 @@ def _select(question, candidates):
     lines = []
     for i, c in enumerate(candidates):
         preview = c["reply"].replace("\n", " ")
-        lines.append("[%d] 主题:%s | 答复:%s" % (i, c["topic"].strip()[:60], preview[:160]))
+        lines.append(
+            "[%d] 来源:%s 时间:%s | 主题:%s | 答复:%s"
+            % (
+                i,
+                c.get("src", "?"),
+                c.get("time", "") or "未知",
+                c["topic"].strip()[:80],
+                preview[:240],
+            )
+        )
     prompt = (
-        "用户问题：%s\n\n候选记录：\n%s\n\n"
-        "请选出唯一最匹配且正确权威的记录，只输出其编号数字。"
+        "用户问题：%s\n\n候选记录（按编号）：\n%s\n\n"
+        "请按系统规则选出唯一最匹配且为当前有效口径的记录："
+        "优先最新且正式的处理口径，排除旧版/归档/试点/他插件记录与高风险错误做法。"
+        "只输出其编号数字。"
         % (question, "\n".join(lines))
     )
     out = ask(prompt, system=SELECT_SYSTEM, temperature=0.0, max_tokens=10, enable_thinking=False)
