@@ -1,0 +1,11 @@
+{
+  "name": "defect_root_cause",
+  "description": "Locate a system defect by building one complete front-office workflow evidence chain across page screenshots, frontend log, backend validation log, network HAR and form_schema rules, then map validation codes to root causes. Returns 'module,interface,rootCauseKeywords' (keywords joined by Chinese 、). Use for system problem localization / root-cause judgment tasks.",
+  "entrypoint": "scripts/run.py",
+  "timeout_seconds": 900,
+  "input_schema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": true
+  }
+}

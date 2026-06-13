@@ -76,6 +76,12 @@ class LocalMCPClient:
         runtime_context: dict[str, Any],
     ) -> Any:
         args = dict(args or {})
+        # Publish the runtime context so contestant tools / skills can resolve
+        # the question's declared file paths (only text_read_file resolves paths
+        # for free below).
+        from source.runtime.tool_context import set_runtime_context
+
+        set_runtime_context(runtime_context)
         allowed_tools = set(runtime_context.get("allowed_tools") or [])
         allowed_agents = set(runtime_context.get("allowed_agents") or [])
 

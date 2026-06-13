@@ -1,0 +1,11 @@
+{
+  "name": "api_test_runner",
+  "description": "Execute API test cases against a local HTTP service in order, using real calls, and report which test case IDs fail. Handles token fetch + reuse rules, X-Package-Id header, multi-step cases and field/value assertions. Returns failing case IDs comma-separated in case order. Use for 'interface test result identification' tasks.",
+  "entrypoint": "scripts/run.py",
+  "timeout_seconds": 1800,
+  "input_schema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": true
+  }
+}

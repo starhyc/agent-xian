@@ -1,0 +1,11 @@
+{
+  "name": "po_compliance_audit",
+  "description": "Audit purchase orders for compliance: filter by finished status and amount threshold, then require both vendor service-scope coverage and a valid VP approval (sender email maps to a VP whose role is valid on the approval date, not later than po_date, and the email body must approve all service_items of this exact PO). Reads approval attachment bodies. Returns non-compliant po_ids ascending, comma-separated. Use for PO compliance audit tasks.",
+  "entrypoint": "scripts/run.py",
+  "timeout_seconds": 1200,
+  "input_schema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": true
+  }
+}

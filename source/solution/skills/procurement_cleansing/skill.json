@@ -1,0 +1,11 @@
+{
+  "name": "procurement_cleansing",
+  "description": "Cleanse raw purchase-order records against vendor master data, category taxonomy and per-PO attachment evidence (invoices/contracts/chat, text or image), then sum the valid CNY purchase amount for each query. Enforces vendor/category/amount/currency confirmation rules and evidence tiers. Returns comma-separated integer totals in query order. Use for purchase data cleansing & summation tasks.",
+  "entrypoint": "scripts/run.py",
+  "timeout_seconds": 1800,
+  "input_schema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": true
+  }
+}

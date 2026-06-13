@@ -1,0 +1,11 @@
+{
+  "name": "fse_persona_qa",
+  "description": "Answer DevPilot IDE-plugin FSE digital-human support questions. Builds a candidate answer pool from chat_history.db (keyed messages) and the local Wiki service FAQs, selects the matching source per question, and assembles each result as 'id=>persona_phrase|||reply|||service_action' with reply taken VERBATIM from the source and service_action resolved via the action-key map. Returns a JSON array text. Use for FSE persona Q&A / IDE plugin support tasks.",
+  "entrypoint": "scripts/run.py",
+  "timeout_seconds": 2400,
+  "input_schema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": true
+  }
+}

@@ -161,11 +161,44 @@ class SkillRuntime:
             cwd=str(skill.skill_dir),
             timeout=skill.timeout_seconds,
             check=False,
+            env=self._skill_env(),
         )
         if completed.returncode != 0:
             error = completed.stderr.strip() or completed.stdout.strip()
             raise RuntimeError(f"skill {skill.name} failed with exit code {completed.returncode}: {error}")
         return completed.stdout.strip()
+
+    def _skill_env(self) -> dict[str, str]:
+        """Inherit the parent env and add question file context for the skill.
+
+        Skill subprocesses cannot see the in-process runtime context, so we pass
+        the question directory and the declared file allowlist as env vars. Also
+        ensure the repo root is importable (PYTHONPATH) and a longer timeout
+        budget for skills that orchestrate model calls.
+        """
+
+        import os
+
+        from source.runtime.tool_context import (
+            allowed_paths,
+            question_dir,
+            question_id,
+            question_text,
+            workspace_root,
+        )
+
+        env = dict(os.environ)
+        env["QUESTION_DIR"] = str(question_dir())
+        env["QUESTION_TEXT"] = question_text()
+        env["QUESTION_ID"] = question_id()
+        env["ALLOWED_FILE_PATHS"] = os.pathsep.join(str(p) for p in allowed_paths())
+        env["WORKSPACE_ROOT"] = str(workspace_root())
+        repo_root = SOURCE_DIR.parent
+        existing = env.get("PYTHONPATH", "")
+        env["PYTHONPATH"] = (
+            str(repo_root) + (os.pathsep + existing if existing else "")
+        )
+        return env
 
     def _resolve(self, name: str) -> SkillPackage:
         key = self._aliases.get(name) or self._aliases.get(_normalize_name(name))

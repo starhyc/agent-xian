@@ -1,0 +1,11 @@
+{
+  "name": "date_extraction",
+  "description": "Extract and normalize dates from customer/service messages into yyyy-mm-dd, handling dotted/slash/Chinese formats, relative dates, weekday and workday/week-number reasoning. Use for tasks that ask to parse a date per line and return comma-separated yyyy-mm-dd.",
+  "entrypoint": "scripts/run.py",
+  "timeout_seconds": 600,
+  "input_schema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": true
+  }
+}

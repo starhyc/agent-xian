@@ -1,0 +1,11 @@
+{
+  "name": "java_fix_run",
+  "description": "Repair a broken Java personal-income-tax calculator, detect the Java version, and produce outputs for given salary inputs. Decodes the program's own embedded (base64) tax brackets and threshold and applies the documented formula, cross-checking against compiling/running the fixed Java. Returns the java version line followed by the per-input results, comma-separated. Use for Java source fix-and-run tax tasks.",
+  "entrypoint": "scripts/run.py",
+  "timeout_seconds": 900,
+  "input_schema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": true
+  }
+}

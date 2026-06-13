@@ -1,0 +1,11 @@
+{
+  "name": "image_prompt_classify",
+  "description": "Learn the most effective classification prompt from a labeled training image set (image + .txt label), then apply it to classify each validation image via the multimodal model. Returns predictions as 'index+LABEL,index+LABEL,...'. Use for prompt-learning image classification tasks (e.g. detecting an object/condition with PASS/FAIL/NOT_INVOLVED-style labels).",
+  "entrypoint": "scripts/run.py",
+  "timeout_seconds": 3000,
+  "input_schema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": true
+  }
+}

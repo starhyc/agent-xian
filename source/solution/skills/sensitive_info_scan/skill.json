@@ -1,0 +1,11 @@
+{
+  "name": "sensitive_info_scan",
+  "description": "Recursively scan an archive (nested zip/tar, multi-level dirs) for sensitive information: phone numbers, emails, ID-card numbers and API keys. Scans text/log files with regex and OCRs images, then returns counts as 'phone,email,idcard,apikey'. Use for sensitive-information scanning tasks over compressed packages.",
+  "entrypoint": "scripts/run.py",
+  "timeout_seconds": 3000,
+  "input_schema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": true
+  }
+}

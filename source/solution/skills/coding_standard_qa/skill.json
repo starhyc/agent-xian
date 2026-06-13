@@ -1,0 +1,11 @@
+{
+  "name": "coding_standard_qa",
+  "description": "Answer questions strictly from a set of coding-standard / specification documents (Java/Python/C++/JS-TS/Web-security etc.). Reads all spec docs in the declared folder, answers each Q in the original document wording (not translated), and returns answers joined by ';' in question order.",
+  "entrypoint": "scripts/run.py",
+  "timeout_seconds": 600,
+  "input_schema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": true
+  }
+}

@@ -40,6 +40,7 @@ class AgentContext:
             args or {},
             runtime_context={
                 "question_id": self.question.get("id"),
+                "question_text": self.question.get("question", ""),
                 "question_dir": str(self.question_dir),
                 "allowed_file_paths": [str(path) for path in self.allowed_file_paths],
                 "allowed_tools": self.allowed_tools,
