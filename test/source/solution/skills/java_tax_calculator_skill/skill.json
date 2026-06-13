@@ -1,0 +1,24 @@
+{
+  "name": "java_tax_calculator_skill",
+  "version": "1.0.0",
+  "description": "修复并运行 Java 个人所得税计算器，执行隐藏用例",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "java_file": {
+        "type": "string",
+        "description": "Java 源码文件路径"
+      }
+    },
+    "required": ["java_file"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "answer": {
+        "type": "string",
+        "description": "格式化的答案字符串，格式：contain[版本号],is[结果1],is[结果2],..."
+      }
+    }
+  }
+}

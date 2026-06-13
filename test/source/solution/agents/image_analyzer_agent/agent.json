@@ -1,0 +1,7 @@
+{
+  "name": "image_analyzer_agent",
+  "description": "Analyzes images using computer vision capabilities and returns structured classification results.",
+  "role": "Image Vision Analyst",
+  "entrypoint": "scripts/run.py",
+  "timeout_seconds": 60
+}

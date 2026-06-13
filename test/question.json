@@ -1,0 +1,142 @@
+[
+    {
+        "id": "1_1",
+        "title": "客服消息日期提取与标准化",
+        "description": "附件文件每行是一条用户消息，消息中有对日期的相关描述。\n\n请从每条消息中解析出对应的日期，转换为'yyyy-mm-dd'格式，按行顺序返回所有日期，日期之间用英文逗号分隔。\n\n【返回格式示例】2026-05-06,2026-05-07",
+        "explanation": "1、日期格式变种：可能包含点分隔、斜杠分隔、中文格式等\n2、相对日期变种：基准日期可能变化\n3、工作日计算变种：可能涉及工作日推算\n4、周次计算变种：可能涉及周次计算\n5、其他变种等",
+        "files": [
+            "customer_date_messages.txt"
+        ],
+        "level": 1,
+        "tools": [],
+        "skills": [],
+        "sub_agents": []
+    },
+    {
+        "id": "1_2",
+        "title": "华为编程规范问答",
+        "description": "附件是华为编程规范集，包含以下多个规范文档：请根据各规范回答以下问题：\n\n【Java规范】\nQ1: Java源文件的import排序中，华为公司包（com.huawei.*）应该在哪一类之后？\nQ2: What suffix should be used for long type numeric literals in Java?\n\n【Python规范】\nQ3: Python中导入模块应该按照什么顺序排列？\nQ4: In Python, which operator should be used when comparing with None?\n\n【C++规范】\nQ5: C++源文件和头文件的扩展名分别是什么？\nQ6: In C++, should copy constructor and copy assignment operator be declared together or separately?\n\n【JS/TS规范】\nQ7: JavaScript/TypeScript中构造器函数和类应该采用什么命名风格？\nQ8: In JavaScript/TypeScript, which operators should be used for equality comparison?\n\n【Web安全规范】\nQ9: Web应用中口令输入框的type属性应该设置为什么值？\nQ10: In Web applications, what attribute should session cookies have to prevent XSS attack reading?\n\n重要提示：即使问题以英文提问，答案也必须遵循规范文档中的原文内容，而非英文翻译。\n\n返回格式：所有问题答案用英文分号分隔，按Q1~Q10顺序返回。\n\n【返回格式示例】\nQ1答案;Q2答案;Q3答案;Q4答案",
+        "explanation": "1、问题数量可能变化（每规范的问题数不固定）\n2、问题顺序可能调整\n3、规范文档内容不再变化",
+        "files": [
+            "./编程规范/"
+        ],
+        "level": 1,
+        "tools": [],
+        "skills": [],
+        "sub_agents": []
+    },
+    {
+        "id": "1_3",
+        "title": "系统问题定位与根因判断",
+        "description": "某系统管理平台出现一次页面操作失败，需要根据页面记录、前端日志、后端校验日志、网络抓包和校验规则等材料，判断问题最可能出现在哪个模块、涉及哪个接口，以及最可能的一个或多个根因。\n\n【输入文件】\n- defect_screenshots.zip：问题发生前后的页面截图材料，用于确认可见页面、操作对象、页面时间或页面上的定位标识\n- frontend_log.log：前端运行日志，可能包含 actionId、requestId、traceId、pageTime、pageGroup、displayObject、screenshotFile、前端适配器或提交结果\n- backend_validation.log：后端校验日志，可能包含 validationRef、requestId、traceId、stage、source、validationCode、fieldPath、schemaVersion 或校验结果\n- network.har：浏览器网络抓包记录，可能包含真实接口、请求/响应体、请求头、状态码、actionId、requestId、traceId 或 validationRef\n- form_schema.json：校验码、字段、阶段、模块或 schemaVersion 与根因关键词之间的映射和过滤规则\n\n【你的任务】\n请先把所有输入材料抽取为证据池，识别可能的页面记录、前端事件、网络请求、后端校验、最终失败呈现和根因规则。最终答案必须来自同一条完整前台作业流：该链路需要能连续关联页面记录、前端人工提交事件、网络请求、后端校验结果和最终可见失败呈现。\n日志、HAR 和后端校验中可能同时存在多个失败、相似截图、相邻重试、诊断回放、预校验、静态资源异常或后台任务候选。只有局部字段能关联、只有相似截图、只属于重试/回放/诊断/后台处理，或不能串起完整前台作业流的候选，不得作为最终答案依据。\n不同题目中可用的入口文件、关联字段和有效校验范围可能不同，不要预设固定文件顺序，也不要预设一定通过 actionId 或 validationRef 关联。请按当前输入文件中的 form_schema.json 决定校验码如何过滤和映射，不要预设所有题目使用同一种过滤方式：\n- 若 form_schema.json 只有 validationCodeMap：先锁定完整前台作业流，再将该链路下的 validationCode 通过 validationCodeMap 映射为根因关键词。\n- 若 form_schema.json 存在 effectiveValidationRule：只有同时满足该规则字段要求的 validationCode 才有效；同一链路下不满足规则的预校验、诊断上报或噪声校验码应排除。\n- 若 form_schema.json 存在 rootCauseRules：需要按规则中的 module、validationCode、fieldPath、schemaVersion 等条件匹配，匹配成功的 rootCause 才输出。\n同一完整前台作业流下，凡是有效 validationCode 能映射到根因关键词的，都必须全部输出。\n\n【返回格式】\n仅返回一个字符串，格式为：缺陷模块,异常接口,根因关键词。多个根因关键词之间使用中文顿号“、”连接，不要输出解释。\n\n【样例输出】\n示例模块,/api/example/action,接口路径配置错误",
+        "explanation": "1、后续题目可能在公开用例基础上调整业务模块、操作对象、接口路径、日志内容、抓包记录、关联字段、校验阶段、字段路径或根因映射规则；2、请以实际输入文件中的页面记录、前端事件、接口请求、后端校验和 form_schema.json 规则为准，不要直接套用公开样例中的固定结论或固定证据顺序；3、判断时需要先构建候选作业流，再选择唯一能跨文件形成完整前台作业流闭环的证据链，尤其不要跨 workflowId/requestId/actionId/traceId/validationRef 合并根因；4、相似截图、相邻重试、诊断回放、预校验、静态资源异常或后台任务记录可能只是干扰项，应根据是否能形成完整前台作业流判断是否采纳；5、最终结果应严格按照题目要求的字符串格式输出。6、截图包可能包含噪声图、失败后审计或处理记录；截图文件顺序、最后一张截图或单张报错图都不能单独作为最终结论，必须回到完整前台作业流和 form_schema.json 规则确认。",
+        "files": [
+            "./系统问题定位/defect_screenshots.zip",
+            "./系统问题定位/frontend_log.log",
+            "./系统问题定位/backend_validation.log",
+            "./系统问题定位/network.har",
+            "./系统问题定位/form_schema.json"
+        ],
+        "level": 1,
+        "tools": [],
+        "skills": [],
+        "sub_agents": []
+    },
+    {
+        "id": "1_4",
+        "title": "接口测试结果识别",
+        "description": "某接口测试平台提供一组用户管理类接口，需要根据接口真实响应判断公开测试用例是否通过。\n\n【输入文件】\n- api_doc.md：接口路径、请求方式、参数和返回结构说明\n- test_cases.json：需要顺序执行的公开测试用例和断言要求\n- auth_config.json：接口调用所需的鉴权配置\n\n【本地服务】\n本地接口服务地址为 http://127.0.0.1:18081。\n\n【你的任务】\n请根据输入文件，通过真实接口调用完成 test_cases.json 中所有用例的验证，并判断哪些测试用例未通过。用例需按文件中的出现顺序执行；部分用例需要连续调用多个接口，并按描述校验指定响应。公开调测用例已做自稳定设计，完整重复执行时失败用例集合应保持一致。\n\n【返回格式】\n仅返回失败用例 ID，多个 ID 按测试用例顺序用英文逗号分隔，不要输出解释。\n\n【样例输出】\nTC000,TC999",
+        "explanation": "1、后续题目可能在公开用例基础上变化接口定义，包括新增或删除接口、调整接口路径、请求方式、参数结构、鉴权规则和返回字段结构；也可能同步调整输入数据、接口响应表现或断言校验要求；2、请以实际输入文件中的 api_doc.md、test_cases.json、auth_config.json 和真实接口响应为准，不要直接套用公开样例中的固定接口、固定数据或固定结论；3、判断时需要关注用例之间的先后影响、连续接口访问关系、鉴权 token 复用规则以及返回内容是否完整、准确；4、最终结果应严格按照题目要求的格式输出。\n5、同一轮用例验证需保持同一个 X-Package-Id，服务会按 packageId 保留删除、状态变更、标签、备注和归档等运行态数据，后续查询和统计应以当前 packageId 的真实状态为准。",
+        "files": [
+            "./测试用例接口文档/api_doc.md",
+            "./测试用例接口文档/test_cases.json",
+            "./测试用例接口文档/auth_config.json"
+        ],
+        "level": 1,
+        "tools": [],
+        "skills": [],
+        "sub_agents": []
+    },
+    {
+        "id": "2_1",
+        "title": "采购数据清洗与汇总",
+        "description": "请根据采购录入数据、供应商主数据、采购品类定义和上传附件，对 purchase_orders_raw.csv 做内部清洗，然后计算 queries.csv 中每个查询对应的 2026 年 CNY 采购总额。\n\npurchase_orders_raw.csv 中的 vendor_id、category_code、amount_raw、currency 是系统录入值，可能为空、错录，或与当前 PO 的有效附件证据冲突，不能无条件直接信任。只有能唯一确认供应商、品类、金额、币种的 PO，才可以计入汇总；任一项无法唯一确认时，该 PO 不计入任何 query。本题提供的 PO 记录均为 2026 年数据。\n\n清洗和统计规则：\n1. 有效附件是指关联当前 PO、未作废、不是旧版、不是错 PO 的附件；作废、旧版、错 PO 附件不能作为有效证据；\n2. 供应商校验/补全：如果 vendor_id 缺失、无效，或与有效发票/合同中的供应商法定主体冲突，需要根据 vendors.csv、法定名称、统一社会信用代码和当前 PO 的有效附件重新确认唯一 vendor_id；无法唯一确认时不计入；\n3. 品类校验/补全：category_code 必须最终对应 category_taxonomy.csv 第一列 category_code。若 category_code 缺失、无效，或与当前 PO 的有效合同服务范围明显冲突，需要根据 category_taxonomy.csv 和有效合同/服务范围重新确认唯一 category_code；聊天截图、报价单、比价记录和发票项目名只能作为用途线索，不能在品类不唯一时单独定类；\n4. 金额校验/补全：系统金额清楚且有效附件未否定时，使用系统金额；系统金额缺失时，只有匹配当前 PO 的有效发票可以补金额；\n5. 如果系统金额大于对应有效发票金额，该 PO 不计入；合同金额、预算、报价单和聊天估算金额都不能作为补救凭证；\n6. 币种校验：只统计 CNY；系统币种或有效发票币种为 USD/EUR 等非 CNY 的记录不计入，不做汇率换算；币种缺失时，只能用匹配当前 PO 的有效发票确认；\n7. 有效发票可校验金额、币种、供应商法定名称和统一社会信用代码；\n8. 合同可辅助确认供应商主体和服务范围/采购品类，但不能补全、覆盖或推翻系统金额/发票金额；\n9. 聊天截图、报价单和比价记录只能提示用途、附件关系或异常，不能补金额、不能覆盖系统金额；\n10. 按 queries.csv 的 query_id 升序输出总额，金额为不带逗号的整数；输出项数量必须与 queries.csv 行数一致，无匹配金额时输出 0。\n\n请只输出一个逗号分隔字符串，不要输出解释。例如：11,12,13",
+        "explanation": "公开题用于理解清洗口径、输出格式和证据等级；三套变种保持同一业务规则，但分别覆盖近似基线重采样、发票金额/币种边界、供应商与品类归一。需要处理供应商近名/简称/英文名、vendor_id 与有效发票或合同主体冲突、category_code 缺失或与合同服务范围冲突、金额缺失或脏格式、系统金额大于发票金额、币种缺失或非 CNY 发票冲突、作废/旧版/错 PO 附件、合同/聊天/比价记录弱证据、无关噪声记录；所有 PO 记录均为 2026 年数据，不考察 PO 状态过滤。请基于 vendors.csv、category_taxonomy.csv、purchase_orders_raw.csv、queries.csv 和有效附件做泛化判断，不要依赖公开题固定行号、固定关键词、附件数量或答案数量。",
+        "files": [
+            "./采购数据清洗与汇总/"
+        ],
+        "level": 2,
+        "tools": [],
+        "skills": [],
+        "sub_agents": []
+    },
+    {
+        "id": "2_2",
+        "title": "敏感信息扫描",
+        "description": "附件是一个压缩包（sensitive_data_2_1.zip），压缩包内包含多层目录结构，目录中可能有.txt、.log、.tar、.png/.jpg等文件。\n\n请扫描压缩包内所有文件中的敏感信息，敏感信息类型包括：\n1) 手机号：以1开头的11位数字\n2) 邮箱地址：符合user@domain.com格式\n3) 身份证号：18位，最后一位可能为X\n4) API Key：以sk-开头的字符串（长度不定）\n\n汇总敏感信息数量，返回格式：'手机号,邮箱,身份证,APIKey'，用英文逗号分隔。\n\n【返回示例】\n检测到3个手机号、2个邮箱、1个身份证、1个API Key，输出：3,2,1,1",
+        "explanation": "1、压缩包层级可能变化（目录深度1-5层）\n2、tar文件内可能包含多层子目录\n3、.txt/.log文件数量可能变化\n4、图片数量可能变化，图片内容需要自行解析\n5、敏感信息类型可能增加",
+        "files": [
+            "sensitive_data_2_1.zip"
+        ],
+        "level": 2,
+        "tools": [],
+        "skills": [],
+        "sub_agents": []
+    },
+    {
+        "id": "2_3",
+        "title": "Java个人所得税计算器",
+        "description": "附件是一份半成品Java源码（JavaSource_7_1.java），程序功能是计算个人所得税：输入税前工资（月薪），输出应缴纳个人所得税。\n\n【你的任务】\n1. 执行 java -version 命令，检测Java环境版本\n2. 阅读源码中的注释说明，了解计算规则\n3. 修复源码中的错误\n4. 编译并运行程序，验证示例输入输出\n5. 使用10个隐藏用例测试，记录输出结果\n\n【示例输入输出】\n3000 -> 0.00\n8000 -> 90.00\n15000 -> 590.00\n30000 -> 2340.00\n100000 -> 27440.00\n\n【隐藏用例】（以下输入按顺序执行，对应10个输出）\n5000\n12000\n25000\n35000\n55000\n60000\n80000\n90000\n150000\n500000\n\n【返回格式】\n先输出 java -version 的完整输出（只需包含版本号，如 openjdk version \"17.0.2\"）\n然后按顺序输出10个隐藏用例的结果，用逗号分隔\n\n【返回格式示例】\nopenjdk version \"17.0.2\",隐藏用例1答案,隐藏用例2答案",
+        "explanation": "1、税率表和速算扣除数可能变化；2、起征点可能调整；3、错误数量和位置可能变化；4、输入范围可能扩大",
+        "files": [
+            "JavaSource_7_1.java"
+        ],
+        "level": 2,
+        "tools": [],
+        "skills": [],
+        "sub_agents": []
+    },
+    {
+        "id": "3_1",
+        "title": "提示词学习与推理",
+        "description": "这是一个图片中长筒手套检测场景。\n\n【任务描述】\n判断图片中是否存在长筒手套。\n- 如果在地上或者人手上出现长筒手套，返回PASS\n- 如果未看到人手的部分，返回NOT_INVOLVED\n- 如果看到所有的人手都没有长筒手套，则返回FAIL\n\n数据集：\n1. 训练集（训练集文件夹）包含20张图片，每张图片对应一个标签文件（.txt），标签为PASS/FAIL/NOT_INVOLVED之一\n2. 验证集（验证集文件夹）包含100张图片\n3. 通过分析训练集样本，总结出对该任务最有效的提示词\n4. 使用学到的提示词对验证集每条数据进行推理，输出每条数据的预测结果\n\n【返回格式】\n所有验证集样本的推理结果，格式为：图片序号+预测结果,图片序号+预测结果\n\n【返回结果格式样例】\n1NOT_INVOLVED,2PASS,3FAIL,4FAIL",
+        "explanation": "1、任务类型可能变化；2、训练集规模可能变化；3、验证集规模可能变化；4、输出类别数量可能变化",
+        "files": [
+            "./训练集/",
+            "./验证集/"
+        ],
+        "level": 3,
+        "tools": [],
+        "skills": [],
+        "sub_agents": []
+    },
+    {
+        "id": "3_2",
+        "title": "采购PO合规审计",
+        "description": "请审计 purchase_orders_raw.csv 中的全部 PO，根据 vendors.csv、people_roles.csv、approval_evidence.csv 和 audit_rules.md，并阅读 approval_evidence.csv 中 file_path 指向的附件正文，判断哪些 PO 不合规。\n\n请输出一个逗号分隔的 po_id 字符串，po_id 按升序排列；如果没有不合规 PO，输出空字符串。不要输出解释。\n\n审计规则：\n1. 先做状态筛选：只审计状态语义明确表示已结束、已完成、已支付、已验收、已关闭或已结案的 PO。草稿、评审中、审批中、待补件、取消、作废等未结束或已取消/作废状态不进入审计。状态字段可能使用中英文表达，请按状态语义判断，不要假设题面列出了全部取值。\n2. 再做金额筛选：只有状态有效且 amount_cny 达到或超过 50000 CNY 的 PO 才进入合规深审；状态无效或金额低于阈值的 PO 不输出。\n3. 深审 PO 必须同时满足供应商服务范围覆盖和 VP 审批有效；任一项不满足，则该 PO 不合规。\n4. 供应商校验：vendor_id 和 vendor_name 已经给出，不考察简称猜测。需要判断 PO 的 service_items 是否全部属于 vendors.csv 中该供应商的 service_scope。\n5. VP 审批校验：只接受 VP 的明确审批。需要根据审批邮件发件人邮箱匹配 people_roles.csv，确认该人员在审批日期的 role 为 VP，且审批日期处于该 VP 身份有效期内，并且不晚于 po_date。Director、Manager、VP Assistant 或过期 VP 都不算有效 VP 审批。\n6. 审批内容校验：附件可能是一封邮件，也可能是多轮转发/追问。有效审批必须明确覆盖当前 PO，并明确批准当前 PO 的全部 service_items。邮件中的“考虑一下”“先评估”“待补材料”“只批准其中一项”“剩余项另行确认”等不算完整有效审批；审批其他 PO 的邮件也不能覆盖当前 PO。\n7. 本题只需判断 PO 级不合规，不需要输出任何项目或分组结果。附件日期可能有多种常见格式，需要按自然语言日期理解。",
+        "explanation": "本题考察小规模采购 PO 合规审计。公开题和变种都先做状态与金额筛选，再对深审 PO 同时核对供应商服务范围和 VP 审批。VP 审批要求按发件邮箱匹配 people_roles.csv，确认审批日 role 为 VP、日期在有效期内且不晚于 po_date，并阅读附件判断是否明确批准当前 PO 的全部 service_items。部分附件是多轮转发/追问，用来考察审批内容是否真正闭环；不要依赖固定短语、附件数量或答案数量。附件日期可能有多种常见格式，需要按自然语言日期理解。审计规则的阈值也不是固定值。",
+        "files": [
+            "./采购PO合规审计/"
+        ],
+        "level": 3,
+        "tools": [],
+        "skills": [],
+        "sub_agents": []
+    },
+    {
+        "id": "3_3",
+        "title": "IDE 插件 FSE 数字人问答",
+        "description": "某企业内部使用 DevPilot IDE 插件，需要根据 FSE 人设、历史处理记录和 Wiki 资料，回答插件使用与支撑过程中的相关问题。\n\n【输入文件】\n- persona.md：FSE 数字人的人设、称呼和服务表达要求\n- chat_history.db：SQLite 数据库文件，存放历史问题处理记录\n- source_access.json：本地 Wiki 服务的访问入口、接口路径、页面入口和 service_action 可选项\n- dialog_tests_complex.json：需要按顺序回答的问题列表\n\n【本地服务】\n本地 Wiki 服务地址为 http://127.0.0.1:18089。服务程序由单独的 Wiki 服务包提供，启动后请根据 source_access.json 访问页面、搜索资料或提交更新建议。\n\n【你的任务】\n请根据 persona.md、chat_history.db、source_access.json 和 Wiki 服务资料，回答 dialog_tests_complex.json 中所有问题。每个问题都需要输出固定格式的结果，结果由题目 ID、称呼、人设化回答内容和服务动作组成。若题目涉及 Wiki 资料更新建议，请按 source_access.json 中提供的接口提交。\n\n【资料使用与来源规则】\n请以实际输入文件和本地 Wiki 服务查询结果为准，不要直接套用公开样例中的固定结论；\n回答时需要同时关注 FSE 人设要求、历史处理经验、Wiki 资料内容和 service_action 可选项；\n若资料之间存在差异，请结合题目上下文和可查询资料选择合适处理方式；\n最终结果应严格按照题目要求的 JSON 数组文本格式输出。\n若资料存在 DB/Wiki 双源或不同时间线冲突，需要依据题目上下文、Wiki 返回资料和数据库历史记录选择来源；最终 reply 仍必须取选中来源原文。\nservice_action 的唯一依据是选中来源的 service_action_key 与 source_access.service_action_key_map；后续题目可能调整 action key、Wiki 页面、DB 元数据、材料顺序或检索线索。\nWiki search/list 结果只是候选页面信息，最终 reply 和 service_action_key 需以 get_page 返回的 FAQ 详情为准。\n\n【返回格式】\n最终 answer 仅返回 JSON 数组文本，不要输出解释。数组元素必须按 dialog_tests_complex.json 中问题出现顺序排列。每个数组元素格式固定为：题目ID=>persona_phrase|||reply|||service_action。reply 必须与输入资料中可获取的 Wiki FAQ a 字段或 chat_history.db 的 messages.content 原文完全一致；service_action 必须与 source_access.json 的 service_action_options 原文完全一致。reply 和 service_action 不得由模型总结、改写、补充、删减或翻译，任何不一致均不得分。reply 可能为中文、英文或中英混合，必须以来源原文为准，不得翻译。每个元素必须且只能包含一个 => 和两个 |||，persona_phrase、reply、service_action 内部不得包含 =>、||| 或换行符。\n\n【样例输出】\n[\"示例题ID=>您好示例总|||示例处理口径|||标准答复\"]\n\n【service_action 取值规则】service_action 必须先从所选 reply 来源记录的 service_action_key 获取 key，再通过 source_access.json 的 service_action_key_map 映射到具体动作，且映射结果必须与 source_access.json 的 service_action_options 中某一项完全一致。不得根据题目 ID、题目字段名、公开样例顺序或模型语义自行推断 service_action。\n",
+        "explanation": "后续题目可能围绕 IDE 插件不同使用阶段、不同故障表现或不同支撑场景调整输入资料，资料中可能出现中文业务语境与英文技术术语混合，例如 login failure、completion-service、traceId、diagnosticId、workspace_index、Remote Host。",
+        "files": [
+            "./IDE插件FSE/persona.md",
+            "./IDE插件FSE/chat_history.db",
+            "./IDE插件FSE/source_access.json",
+            "./IDE插件FSE/dialog_tests_complex.json"
+        ],
+        "level": 3,
+        "tools": [],
+        "skills": [],
+        "sub_agents": []
+    }
+]
