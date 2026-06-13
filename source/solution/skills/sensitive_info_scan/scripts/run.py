@@ -71,11 +71,35 @@ def _read_compressed(path, suf):
         return data.decode("utf-8", errors="replace")
 
 
+def _discover():
+    """Files to scan: declared files first; if no archive/scannable file is
+    found there (e.g. the declared path didn't resolve), fall back to a
+    recursive sweep of the question directory only — never the shared agent
+    workspace, which may hold another question's leftovers.
+    """
+    declared = list(skillio.list_files())
+    has_archive = any(f.suffix.lower() in ARCHIVE_SUFFIXES for f in declared)
+    if declared and has_archive:
+        return declared
+    extra = []
+    try:
+        qdir = skillio.question_dir()
+        if qdir and qdir.is_dir():
+            seen = {f.resolve() for f in declared}
+            for p in qdir.rglob("*"):
+                if p.is_file() and p.resolve() not in seen:
+                    extra.append(p)
+    except Exception:
+        pass
+    return declared + extra
+
+
 def main() -> None:
     skillio.read_stdin_args()
     counters = {"phone": 0, "email": 0, "idcard": 0, "apikey": 0}
 
-    archives = [f for f in skillio.list_files() if f.suffix.lower() in ARCHIVE_SUFFIXES]
+    all_files = _discover()
+    archives = [f for f in all_files if f.suffix.lower() in ARCHIVE_SUFFIXES]
     workdir = Path(tempfile.mkdtemp(prefix="sens_scan_"))
     roots = []
     for arc in archives:
@@ -85,8 +109,8 @@ def main() -> None:
             roots.append(dest)
         except Exception:
             pass
-    # Also scan any non-archive declared files directly.
-    direct = [f for f in skillio.list_files() if f.suffix.lower() not in ARCHIVE_SUFFIXES]
+    # Also scan any non-archive files directly.
+    direct = [f for f in all_files if f.suffix.lower() not in ARCHIVE_SUFFIXES]
 
     files = []
     for r in roots:
