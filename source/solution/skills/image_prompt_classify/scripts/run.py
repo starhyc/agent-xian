@@ -91,28 +91,35 @@ def _learn_rules(samples, question):
     return labels, skillio.clean_answer(rules)
 
 
-def _classify(img, labels, rules, question):
+def _classify(img, labels, rules, question, fallback):
     label_set = ", ".join(labels)
     prompt = (
         "任务说明：\n%s\n\n判别规则：\n%s\n\n"
         "请判断这张图片的类别，只能从 [%s] 中选择一个，"
-        "只输出该类别本身，不要任何解释或多余字符。"
+        "只输出该类别本身（原样大小写），不要任何解释或多余字符。"
         % (question, rules, label_set)
     )
-    try:
-        out = ask_with_images(prompt, [img], max_tokens=30)
-    except Exception:
-        out = ""
-    out = skillio.clean_answer(out).upper()
-    # Prefer exact label match; else substring; else first label.
+    out = ""
+    for _ in range(2):  # one retry: empty/garbled vision replies must not silently become FAIL
+        try:
+            raw = ask_with_images(prompt, [img], max_tokens=40)
+        except Exception:
+            raw = ""
+        out = skillio.clean_answer(raw).upper()
+        if out:
+            break
+    # Prefer exact match; then substring, checking longer labels first so that
+    # e.g. NOT_INVOLVED is matched before FAIL/PASS and short labels don't win spuriously.
     upper_labels = [(lb, lb.upper()) for lb in labels]
     for lb, up in upper_labels:
         if out == up:
             return lb
-    for lb, up in upper_labels:
-        if up in out:
+    for lb, up in sorted(upper_labels, key=lambda x: len(x[1]), reverse=True):
+        if up and up in out:
             return lb
-    return labels[0] if labels else out
+    # Last resort: the training-set majority class, NOT the alphabetically first
+    # label (which would make a total vision failure collapse to all-"FAIL").
+    return fallback
 
 
 def main() -> None:
@@ -130,9 +137,20 @@ def main() -> None:
             (p for p in val_dir.rglob("*") if p.suffix.lower() in IMG_SUFFIXES),
             key=_index,
         )
+
+    # Majority class of the training set: a sane fallback when a vision call
+    # returns nothing, instead of always defaulting to the first label.
+    counts = {}
+    for _img, lb in samples:
+        counts[lb] = counts.get(lb, 0) + 1
+    if counts:
+        fallback = max(counts, key=lambda k: counts[k])
+    else:
+        fallback = labels[0] if labels else ""
+
     parts = []
     for img in val_imgs:
-        pred = _classify(img, labels, rules, question)
+        pred = _classify(img, labels, rules, question, fallback)
         parts.append("%d%s" % (_index(img), pred))
     skillio.emit(",".join(parts))
 
