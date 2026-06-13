@@ -1,0 +1,27 @@
+2026-05-23 12:00:20.001 INFO  [validation-engine] validation batch started, source=browser-session
+2026-05-23 12:00:22.174 INFO  [validation-engine] validation started, validationRef=VAL-PUB-5301
+2026-05-23 12:00:22.176 INFO  [validation-engine] permission check completed, validationRef=VAL-PUB-5301, result=PASS_OR_NOT_APPLICABLE
+2026-05-23 12:00:22.180 WARN  [validation-engine] validationCode=S9001, validationRef=VAL-PUB-5301
+2026-05-23 12:00:22.299 INFO  [validation-engine] validation finished, result=REJECTED, validationRef=VAL-PUB-5301
+2026-05-23 12:00:22.174 INFO  [validation-engine] validation started, validationRef=VAL-PUB-2186
+2026-05-23 12:00:22.176 INFO  [validation-engine] permission check completed, validationRef=VAL-PUB-2186, result=PASS_OR_NOT_APPLICABLE
+2026-05-23 12:00:22.180 WARN  [validation-engine] validationCode=V2401, validationRef=VAL-PUB-2186
+2026-05-23 12:00:22.181 WARN  [validation-engine] validationCode=D5204, validationRef=VAL-PUB-2186
+2026-05-23 12:00:22.182 WARN  [validation-engine] validationCode=V4107, validationRef=VAL-PUB-2186
+2026-05-23 12:00:22.299 INFO  [validation-engine] validation finished, result=REJECTED, validationRef=VAL-PUB-2186
+2026-05-23 12:00:22.174 INFO  [validation-engine] validation started, validationRef=VAL-ASSET-4040
+2026-05-23 12:00:22.176 INFO  [validation-engine] permission check completed, validationRef=VAL-ASSET-4040, result=PASS_OR_NOT_APPLICABLE
+2026-05-23 12:00:22.180 WARN  [validation-engine] validationCode=S8309, validationRef=VAL-ASSET-4040
+2026-05-23 12:00:22.299 INFO  [validation-engine] validation finished, result=REJECTED, validationRef=VAL-ASSET-4040
+2026-05-23 12:00:22.174 INFO  [validation-engine] validation started, validationRef=VAL-PUB-7429
+2026-05-23 12:00:22.176 INFO  [validation-engine] permission check completed, validationRef=VAL-PUB-7429, result=PASS_OR_NOT_APPLICABLE
+2026-05-23 12:00:22.180 WARN  [validation-engine] validationCode=V2401, validationRef=VAL-PUB-7429
+2026-05-23 12:00:22.181 WARN  [validation-engine] validationCode=V3102, validationRef=VAL-PUB-7429
+2026-05-23 12:00:22.182 WARN  [validation-engine] validationCode=V4107, validationRef=VAL-PUB-7429
+2026-05-23 12:00:22.299 INFO  [validation-engine] validation finished, result=REJECTED, validationRef=VAL-PUB-7429
+
+2026-05-23 12:00:22.190 INFO  [validation-engine] diagnostic replay validation started, validationRef=VAL-PUB-7430, stage=replay, source=diagnostic-replay, workflowRole=diagnostic-replay, replayGroup=RUM-PUB-REPLAY-4713
+2026-05-23 12:00:22.191 INFO  [validation-engine] permission check completed, validationRef=VAL-PUB-7430, result=PASS_OR_NOT_APPLICABLE, stage=replay, source=diagnostic-replay, workflowRole=diagnostic-replay, replayGroup=RUM-PUB-REPLAY-4713
+2026-05-23 12:00:22.192 WARN  [validation-engine] validationCode=V2401, validationRef=VAL-PUB-7430, stage=replay, source=diagnostic-replay, workflowRole=diagnostic-replay, replayGroup=RUM-PUB-REPLAY-4713
+2026-05-23 12:00:22.193 WARN  [validation-engine] validationCode=DUP409, validationRef=VAL-PUB-7430, stage=replay, source=diagnostic-replay, workflowRole=diagnostic-replay, replayGroup=RUM-PUB-REPLAY-4713
+2026-05-23 12:00:22.209 INFO  [validation-engine] validation finished, result=REJECTED, validationRef=VAL-PUB-7430, stage=replay, source=diagnostic-replay, workflowRole=diagnostic-replay, replayGroup=RUM-PUB-REPLAY-4713

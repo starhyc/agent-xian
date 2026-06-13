@@ -1,0 +1,212 @@
+[
+  {
+    "id": "ide_ops_001",
+    "user": {
+      "name": "张伟"
+    },
+    "question": "用户反馈 DevPilot IDE 插件 login failure / auth session 异常，历史聊天里说可以删除整个 ~/.devpilot 目录后重登。现在还能这么处理吗？应该清理哪些 session files？"
+  },
+  {
+    "id": "ide_ops_002",
+    "user": {
+      "name": "李明"
+    },
+    "question": "用户说 code completion no response，插件状态面板里可能涉及 completion-service。小维应该先让用户 reinstall plugin，还是先确认 completion-service 状态、最近一次 completion 请求 traceId 和模型网关返回码？请给出当前排障步骤。"
+  },
+  {
+    "id": "ide_ops_003",
+    "user": {
+      "name": ""
+    },
+    "question": "MCP tool connection failed 时，能不能直接关闭全部 MCP 功能？当前应该如何检查 mcp.json、MCP server 配置以及 stdio/http 模式？"
+  },
+  {
+    "id": "ide_ops_004",
+    "user": {
+      "name": "王强"
+    },
+    "question": "DevPilot IDE Plugin v2.8.0 及以上版本，Windows、macOS、Linux 的 plugin logs path 分别是什么？"
+  },
+  {
+    "id": "ide_ops_005",
+    "user": {
+      "name": "赵敏"
+    },
+    "question": "diagnostics upload 还能不能用旧接口 /api/plugin/report？当前诊断日志上报 API、content-type 和 required fields 是什么？"
+  },
+  {
+    "id": "ide_ops_006",
+    "user": {
+      "name": "孙磊"
+    },
+    "question": "灰度版本 v2.8.0-beta.3 出现 crash 时，是否应该直接让所有用户 manual downgrade？当前 rollout / rollback 运维动作是什么？"
+  },
+  {
+    "id": "ide_ops_007",
+    "user": {
+      "name": "周倩"
+    },
+    "question": "用户反馈 local index 一直 building，有人建议直接删除整个 workspace_index。小维应该采用什么处理口径？"
+  },
+  {
+    "id": "ide_ops_008",
+    "user": {
+      "name": "陈晨"
+    },
+    "question": "code completion 请求返回 gateway 429，小维应该判断成什么问题？建议用户怎么处理？"
+  },
+  {
+    "id": "ide_ops_009",
+    "user": {
+      "name": "许峰"
+    },
+    "question": "code completion 请求返回 gateway 503，应该让用户继续 retry 还是升级处理？"
+  },
+  {
+    "id": "ide_ops_010",
+    "user": {
+      "name": "刘洋"
+    },
+    "question": "用户只说插件不好用，没有提供 pluginVersion、IDE type、traceId 或 failed time。小维应该直接给结论，还是先要求补充哪些信息？"
+  },
+  {
+    "id": "ide_ops_011",
+    "user": {
+      "name": "马超"
+    },
+    "question": "enterprise proxy 和 certificate chain 异常时，用户问能不能直接关闭企业代理或证书校验。小维应该采用什么处理口径？需要考虑 IDE 进程代理继承，以及模型网关和 MCP server 是否走同一代理策略。"
+  },
+  {
+    "id": "ide_ops_012",
+    "user": {
+      "name": "张婷"
+    },
+    "question": "auth session 异常时，哪些 session files 可以清理？是不是不能删除整个 ~/.devpilot 目录？"
+  },
+  {
+    "id": "ide_ops_013",
+    "user": {
+      "name": "黄杰"
+    },
+    "question": "聊天记录里出现了 CTF 平台推荐、IDE theme color、pull-up supplement 这些 noise 内容，应该进入小维的 core handling experience 吗？"
+  },
+  {
+    "id": "ide_ops_014",
+    "user": {
+      "name": "吴越"
+    },
+    "question": "用户说：插件坏了，赶紧告诉我咋办。请用小维的 service style 输出应先要求补充的 pluginVersion、IDE type、traceId 等信息。"
+  },
+  {
+    "id": "ide_ops_015",
+    "user": {
+      "name": "郑凯"
+    },
+    "question": "本机工作区 local index 一直 building，用户希望直接删除整个 workspace_index 快速重建。小维是否应该默认删除整个目录？当前本地索引处理口径是什么？"
+  },
+  {
+    "id": "ide_ops_016",
+    "user": {
+      "name": "唐敏"
+    },
+    "question": "用户第一次 install DevPilot IDE Plugin，当前推荐的安装方式是什么？VS Code、JetBrains、Trae 分别应该使用 marketplace、.vsix 还是 .zip？"
+  },
+  {
+    "id": "ide_ops_017",
+    "user": {
+      "name": "何亮"
+    },
+    "question": "历史聊天里说可以把 plugin zip 手动解压到 IDE plugin directory，现在还能这么指导用户吗？为什么？"
+  },
+  {
+    "id": "ide_ops_018",
+    "user": {
+      "name": "林娜"
+    },
+    "question": "用户问应该安装 stable v2.7.4 还是 beta v2.8.0-beta.3，小维应该怎么判断？"
+  },
+  {
+    "id": "ide_ops_019",
+    "user": {
+      "name": "高峰"
+    },
+    "question": "插件异常时，能不能第一步就让用户 reinstall plugin 并删除 ~/.devpilot？当前 config backup 和安全处理建议是什么？"
+  },
+  {
+    "id": "ide_ops_020",
+    "user": {
+      "name": "邓超"
+    },
+    "question": "用户只说“插件不能用”，想让小维直接帮忙 create support ticket。场景是从零创建完整 ticket required field checklist；请聚焦 employeeId、IDE 类型和版本、OS、pluginVersion、problemType、failedAt、traceId、灰度用户、企业代理、diagnosticId、reproduction、expected behavior、actual behavior 等必填字段。"
+  },
+  {
+    "id": "ide_ops_021",
+    "user": {
+      "name": "郭宇"
+    },
+    "question": "旧记录里说插件问题可以直接在群里 @ 研发处理。现在正式 issue / support ticket 还能只靠群里反馈吗？当前提单流程是什么？"
+  },
+  {
+    "id": "ide_ops_022",
+    "user": {
+      "name": "蒋涛"
+    },
+    "question": "请生成一个符合当前规范的插件问题 support ticket action，问题类型是 completion，用户只提供了 traceId 和 diagnosticId。"
+  },
+  {
+    "id": "ide_ops_023",
+    "user": {
+      "name": "赵敏"
+    },
+    "question": "用户说：你们这个插件太难用了，老是 login failure。小维应该如何处理 negative emotion 和下一步动作？"
+  },
+  {
+    "id": "ide_ops_024",
+    "user": {
+      "name": "李明"
+    },
+    "question": "用户长时间没有回复 logs / traceId 信息，小维应该怎么发送 follow-up reminder？"
+  },
+  {
+    "id": "ide_ops_025",
+    "user": {
+      "name": "王强"
+    },
+    "question": "问题还没有明确 RCA / conclusion，但用户暂时没回复。小维能不能直接 close ticket？应该怎么处理？"
+  },
+  {
+    "id": "ide_ops_026",
+    "user": {
+      "name": "陈晨"
+    },
+    "question": "用户 negative emotion 明显，且一线 troubleshooting 无法安抚时，小维应该怎么 escalation？"
+  },
+  {
+    "id": "ide_ops_027",
+    "user": {
+      "name": "刘洋"
+    },
+    "question": "复杂问题需要建群协同处理，小维建群后应该如何介绍 background、owner、collected info，并按什么 sync interval 通报进展？"
+  },
+  {
+    "id": "ide_ops_028",
+    "user": {
+      "name": "马超"
+    },
+    "question": "同一个用户同时有多个 IDE 插件 support tickets，小维应该分别零散沟通，还是尽量 merge communication？为什么？"
+  },
+  {
+    "id": "ide_ops_029",
+    "user": {
+      "name": "张婷"
+    },
+    "question": "用户不知道如何快捷 create ticket / feedback，小维应该怎么引导入口？"
+  },
+  {
+    "id": "ide_ops_030",
+    "user": {
+      "name": "黄杰"
+    },
+    "question": "用户给了 bad review，说 repeated issues 没人管。小维应该怎么 reply，并如何反馈给 product team？"
+  }
+]
