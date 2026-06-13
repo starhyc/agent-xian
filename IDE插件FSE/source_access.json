@@ -1,0 +1,267 @@
+{
+  "case_id": "3_3",
+  "base_date": "2026-05-25",
+  "wiki_service": {
+    "base_url": "http://127.0.0.1:18089",
+    "endpoints": {
+      "health": "/health",
+      "list_pages": "/api/wiki/pages",
+      "get_page": "/api/wiki/pages/{page_id}",
+      "search": "/api/wiki/search?q={query}",
+      "update_logs": "/api/wiki/update_logs",
+      "submit_update_proposal": "/api/wiki/pages/{page_id}/update_proposal"
+    },
+    "update_contract": {
+      "method": "POST",
+      "path": "/api/wiki/pages/{page_id}/update_proposal",
+      "mode": "proposal_only",
+      "description": "提交 Wiki 更新建议；服务只记录请求，不修改原始 Wiki 页面，避免共享服务时互相影响。",
+      "content_type": "application/json",
+      "body_fields": {
+        "content": "建议更新后的 Wiki 标准处理口径，必须使用最新有效口径",
+        "updated_at": "建议更新时间，格式 YYYY-MM-DD HH:mm:ss；建议使用最新依据时间或更晚时间"
+      }
+    },
+    "search_contract": {
+      "method": "GET",
+      "path": "/api/wiki/search?q={query}",
+      "query": "传入用户原问题、中文业务关键词或英文技术术语，例如 login failure、completion-service、traceId、diagnosticId、workspace_index、enterprise proxy，用于发现候选 Wiki 页面",
+      "match_mode": "page_metadata_rank",
+      "description": "搜索只根据 Wiki 页面标题、内容概览和页面关键词匹配，支持中文业务语境与英文技术材料混合检索，不根据 FAQ 答案正文匹配 Search results do not return FAQ a or service_action_key.",
+      "result_contract": "每条 result 只返回 id、title、overview、updated_at、faq_count 等页面元信息，不返回 url、score 或答案正文",
+      "next_step": "根据搜索结果中的 id 调用 get_page 接口查看 Wiki 完整 FAQ 内容"
+    },
+    "page_contract": {
+      "method": "GET",
+      "path": "/api/wiki/pages/{page_id}",
+      "description": "根据搜索结果的 id 查看完整 Wiki FAQ 内容和页面最近更新时间",
+      "page_updated_at": "页面整体最近更新时间，FAQ 对象不单独提供时间",
+      "content_field": "faqs",
+      "faq_schema": {
+        "id": "FAQ 标识",
+        "q": "明确问题，不应与同页或其他页面 FAQ 混淆",
+        "a": "可直接取用并与标准答案完全匹配的答案",
+        "service_action_key": "Service action key. Resolve it through source_access.service_action_key_map to an exact service_action_options value."
+      }
+    }
+  },
+  "service_action_options": [
+    "标准答复",
+    "阻止高风险操作",
+    "要求补充定位信息",
+    "收集提单必填信息",
+    "技术问题升级二线",
+    "情绪风险升级运营代表或SRE Leader",
+    "建群协同每1小时同步",
+    "发送未响应提醒",
+    "拒绝无结论关单",
+    "合并沟通同一用户多个问题单",
+    "反馈差评与重复问题",
+    "更新Wiki为最新指导",
+    "过滤无关记录"
+  ],
+  "wiki_sources": [
+    {
+      "id": "WKP-6EB4668E0118DF68FA9C79A7A8055D96",
+      "title": "登录失败当前处理流程",
+      "overview": "登录失败、login failure、auth session、session.json、login_state.json、禁止删除整个配置目录",
+      "updated_at": "2026-05-25 09:00:00"
+    },
+    {
+      "id": "WKP-58E4EC671CABC84F2A097161A0A599C2",
+      "title": "代码补全无响应排障流程",
+      "overview": "代码补全无响应、code completion no response、completion-service、traceId、gateway status code",
+      "updated_at": "2026-05-24 14:00:00"
+    },
+    {
+      "id": "WKP-032159B6B881574B0D44524B70C4CDA6",
+      "title": "MCP 工具连接失败处理流程",
+      "overview": "MCP 连接失败、MCP tool connection failed、mcp.json、MCP server、stdio/http mode",
+      "updated_at": "2026-05-23 10:00:00"
+    },
+    {
+      "id": "WKP-6ED0FE77083E3BA5B13E337259EFE760",
+      "title": "插件日志路径与日志收集规范",
+      "overview": "插件日志路径、plugin logs path、Windows、macOS、Linux、Remote Host 日志差异",
+      "updated_at": "2026-05-25 09:30:00"
+    },
+    {
+      "id": "WKP-ACFF0652238C4BF8EA51F3907447AEB8",
+      "title": "诊断日志上报接口 v3",
+      "overview": "诊断日志上传接口、diagnostics upload API、multipart/form-data、diagnosticFile、traceId",
+      "updated_at": "2026-05-22 10:00:00"
+    },
+    {
+      "id": "WKP-765F951A5407173B0AB22C30E05AEC3A",
+      "title": "灰度版本故障回滚策略",
+      "overview": "灰度名单、canary rollout、beta crash、feature flags、rollback v2.7.4",
+      "updated_at": "2026-05-25 13:00:00"
+    },
+    {
+      "id": "WKP-A0E12589C9F39EFDDF6B0DF4FD2680E7",
+      "title": "本地索引失败处理说明",
+      "overview": "本地索引 building、local index、workspace_index、index.lock、metadata.db、旧口径",
+      "updated_at": "2026-05-20 10:00:00"
+    },
+    {
+      "id": "WKP-3E20AF6B520AA5DA5DB9998C1D38723C",
+      "title": "企业代理和证书处理说明",
+      "overview": "企业代理异常、enterprise proxy、certificate chain、IDE 进程代理继承、旧口径",
+      "updated_at": "2026-05-18 10:00:00"
+    },
+    {
+      "id": "WKP-59CCCF881598180E7CA9B1DFF61ECE25",
+      "title": "DevPilot IDE 插件安装规范",
+      "overview": "企业插件市场、plugin marketplace、VS Code .vsix、JetBrains .zip、Trae 安装入口",
+      "updated_at": "2026-05-25 10:00:00"
+    },
+    {
+      "id": "WKP-089CA1A1C25C139800A5164D0A3EE9AD",
+      "title": "插件版本升级与灰度版本说明",
+      "overview": "插件版本选择、stable v2.7.4、beta v2.8.0-beta.3、灰度名单",
+      "updated_at": "2026-05-25 10:20:00"
+    },
+    {
+      "id": "WKP-DE78181BA74AE264DB6464D61FD0B932",
+      "title": "插件卸载与重装安全规范",
+      "overview": "插件卸载重装、reinstall safety、config backup、不要删除整个用户配置目录",
+      "updated_at": "2026-05-25 12:00:00"
+    },
+    {
+      "id": "WKP-4F43582BED769B54C85D9B76C1E691FF",
+      "title": "DevPilot IDE 插件问题提单规范",
+      "overview": "问题提单规范、support ticket required fields、employeeId、traceId、diagnosticId、复现步骤",
+      "updated_at": "2026-05-25 11:00:00"
+    },
+    {
+      "id": "WKP-559A57B69FCE2F856CD47A061F3DFF13",
+      "title": "旧版日志上报接口",
+      "overview": "旧版 /api/plugin/report、legacy report API、file、userId、pluginVersion",
+      "updated_at": "2026-04-10 09:00:00"
+    },
+    {
+      "id": "WKP-220E4EE12DE068039945C008C13153D0",
+      "title": "旧版清理缓存方案",
+      "overview": "旧版清理缓存方案、legacy cache cleanup、delete ~/.devpilot、历史归档",
+      "updated_at": "2026-04-18 10:00:00"
+    },
+    {
+      "id": "WKP-5A0D9650E7486821AC8C59CEECC8B123",
+      "title": "CodeReviewBot 插件服务规范",
+      "overview": "CodeReviewBot、code review plugin、negative feedback、与 DevPilot IDE 插件不同",
+      "updated_at": "2026-05-29 16:00:00"
+    },
+    {
+      "id": "WKP-32B2E01C2935FC5D46356EBF55B8BADA",
+      "title": "插件商城问题单处理规范",
+      "overview": "插件商城、plugin marketplace ticket、diagnostic package、与 DevPilot IDE 插件支撑流程不同",
+      "updated_at": "2026-05-29 16:03:00"
+    },
+    {
+      "id": "WKP-D6EE35A4E16CD77E8F4F16395BB6D318",
+      "title": "浏览器插件规则订阅说明",
+      "overview": "浏览器插件、browser extension、rule subscription、与 IDE 插件无关",
+      "updated_at": "2026-05-28 18:00:00"
+    },
+    {
+      "id": "WKP-09626A043865A59192B2DFEFDA9C2257",
+      "title": "IDE 主题偏好配置建议",
+      "overview": "IDE theme color、light/dark theme、个人偏好配置、与插件故障处理无关",
+      "updated_at": "2026-05-23 10:00:00"
+    },
+    {
+      "id": "WKP-D8D3D74BB62758B4275AF9B6B5C353C8",
+      "title": "SSO 登录异常旧版处理记录",
+      "overview": "SSO login issue、browser cookie、legacy auth cache、历史归档口径",
+      "updated_at": "2026-04-21 11:00:00"
+    },
+    {
+      "id": "WKP-7B55FD3896B705543E111A091781F96F",
+      "title": "华东代理场景补全异常复盘",
+      "overview": "华东代理补全复盘、east proxy review、enterprise proxy、certificate chain、completion no response",
+      "updated_at": "2026-05-29 09:40:00"
+    },
+    {
+      "id": "WKP-3CB325900588F811274A5EF13A233381",
+      "title": "MCP 连接失败旧版处置归档",
+      "overview": "MCP disable old handling、关闭 MCP、旧版本试点口径",
+      "updated_at": "2026-05-08 16:10:00"
+    },
+    {
+      "id": "WKP-529DD6FDFF49F7769979B9BE676EF39C",
+      "title": "Remote Workspace 日志定位说明",
+      "overview": "Remote Workspace logs、Remote Host、远端日志路径、本地日志路径差异",
+      "updated_at": "2026-05-28 18:30:00"
+    },
+    {
+      "id": "WKP-D50237DA1B4542F3B7937F104519A97C",
+      "title": "诊断包隐私与脱敏评审",
+      "overview": "diagnostic package privacy、token redaction、cookie redaction、source snippet filtering",
+      "updated_at": "2026-05-26 11:05:00"
+    },
+    {
+      "id": "WKP-F435F5609CDC2E7DB14510B60C5FA554",
+      "title": "灰度版本回滚历史方案",
+      "overview": "beta rollback history、feature flags、wait next release、历史回滚策略",
+      "updated_at": "2026-05-12 10:00:00"
+    },
+    {
+      "id": "WKP-5C0E7ABFB513050398FC66EFEAB66C94",
+      "title": "远程工作区索引 building 处理说明",
+      "overview": "Remote Workspace index、Remote Host、remote index directory、workspace_index 差异",
+      "updated_at": "2026-05-29 12:10:00"
+    },
+    {
+      "id": "WKP-49A562C4CDCA90E88FB3EB8B6152A570",
+      "title": "企业代理安全评审试点记录",
+      "overview": "enterprise proxy security pilot、certificate trust chain、安全评审、试点用户",
+      "updated_at": "2026-05-29 09:40:00"
+    },
+    {
+      "id": "WKP-8F720FC73D19703F44AFADCC329B8B3D",
+      "title": "手动解压安装旧方案归档",
+      "overview": "manual extract install、plugin directory、zip、旧版安装方式归档",
+      "updated_at": "2026-04-15 12:00:00"
+    },
+    {
+      "id": "WKP-1EB5BC3B9084E2E0A84FBB8358BC08FE",
+      "title": "轻量提单字段草案",
+      "overview": "lightweight ticket draft、traceId、diagnosticId、字段不完整",
+      "updated_at": "2026-05-18 14:00:00"
+    },
+    {
+      "id": "WKP-E41AB5DE00167AEE7E7EF35E38F014BE",
+      "title": "FSE 建群协同旧节奏记录",
+      "overview": "FSE group sync、owner、progress update、旧版同步节奏",
+      "updated_at": "2026-05-20 17:00:00"
+    },
+    {
+      "id": "WKP-F80A7F888D2B156F5ADAEA019209BAF2",
+      "title": "差评与重复问题反馈归档",
+      "overview": "bad review、repeated issues、negative feedback、product team feedback",
+      "updated_at": "2026-05-27 09:00:00"
+    }
+  ],
+  "service_action_key_map": {
+    "PUB-K01": "标准答复",
+    "PUB-K02": "阻止高风险操作",
+    "PUB-K03": "要求补充定位信息",
+    "PUB-K04": "收集提单必填信息",
+    "PUB-K05": "技术问题升级二线",
+    "PUB-K06": "情绪风险升级运营代表或SRE Leader",
+    "PUB-K07": "建群协同每1小时同步",
+    "PUB-K08": "发送未响应提醒",
+    "PUB-K09": "拒绝无结论关单",
+    "PUB-K10": "合并沟通同一用户多个问题单",
+    "PUB-K11": "反馈差评与重复问题",
+    "PUB-K12": "更新Wiki为最新指导",
+    "PUB-K13": "过滤无关记录"
+  },
+  "service_action_resolution": {
+    "action_key_field": "service_action_key",
+    "map_field": "service_action_key_map",
+    "wiki_faq_source": "Wiki get_page FAQ objects may include service_action_key. Map it through source_access.service_action_key_map to one exact service_action_options value.",
+    "history_db_source": "chat_history.db may include message_actions(message_id, service_action_key). When reply is copied from messages.content, use the same message_id action key first.",
+    "selected_source_rule": "The final service_action must come from the selected reply source action key. Do not hard-code public category, public id, or public answer order."
+  }
+}

@@ -1,0 +1,9 @@
+﻿person_id,display_name,email,role,valid_from,valid_to
+P001,王以宁,wang.yining@corp.example,VP,2026-01-01,2026-12-31
+P002,林知远,lin.zhiyuan@corp.example,VP,2026-02-01,2026-07-31
+P003,赵明澈,zhao.mingche@corp.example,Director,2026-01-01,2026-12-31
+P004,秦若川,qin.ruochuan@corp.example,Manager,2026-01-01,2026-12-31
+P005,陈思澄,chen.sicheng@corp.example,VP,2026-05-01,2026-12-31
+P006,沈砚,shen.yan@corp.example,VP,2025-01-01,2026-03-31
+P007,沈砚,shen.yan.new@corp.example,Director,2026-04-01,2026-12-31
+P008,韩予,han.yu@corp.example,VP Assistant,2026-01-01,2026-12-31

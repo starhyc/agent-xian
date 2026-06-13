@@ -1,0 +1,27 @@
+[2026-05-23 12:00:01.010] [INFO] app mounted, env=prod, version=2.9.1
+[2026-05-23 12:00:02.220] [INFO] batch diagnostic collection started, source=browser-session
+[2026-05-23 12:00:09.001] [INFO] workflow step=module-open, workflowId=WF-PUB-USER-10023, screenshotFile=capture_001.png, pageGroup=User Management, displayObject="user management"
+[2026-05-23 12:00:09.420] [INFO] workflow step=search, workflowId=WF-PUB-USER-10023, screenshotFile=capture_002.png, keyword=zhangsan, pageGroup=User Search, displayObject="Zhang San / zhangsan / UID 10023"
+[2026-05-23 12:00:09.830] [INFO] workflow step=result-select, workflowId=WF-PUB-USER-10023, screenshotFile=capture_003.png, pageGroup=User Profile, displayObject="Zhang San / zhangsan / UID 10023"
+[2026-05-23 12:00:10.350] [INFO] workflow step=profile-open, workflowId=WF-PUB-USER-10023, screenshotFile=capture_004.png, pageGroup=User Edit, displayObject="Zhang San / zhangsan / UID 10023"
+[2026-05-23 12:00:10.760] [INFO] workflow step=edit-open, workflowId=WF-PUB-USER-10023, screenshotFile=capture_005.png, pageGroup=User Edit, displayObject="Zhang San / zhangsan / UID 10023"
+[2026-05-23 12:00:11.120] [INFO] workflow step=field-review, workflowId=WF-PUB-USER-10023, screenshotFile=capture_006.png, pageGroup=User Edit, displayObject="Zhang San / zhangsan / UID 10023"
+[2026-05-23 12:00:11.530] [INFO] workflow step=submit-review, workflowId=WF-PUB-USER-10023, screenshotFile=capture_007.png, pageGroup=User Review, displayObject="Zhang San / zhangsan / UID 10023"
+[2026-05-23 12:00:11.720] [INFO] background job captured, actionId=ACT-PUB-2001, screenshotFile=capture_008.png, visibleMarker=REC-P-0B81, pageTime=10:16:23, pageGroup=Role Sync Job, displayObject="/api/role/sync", workflowRole=background-job
+[2026-05-23 12:00:11.721] [ERROR] background job result=FAILED, actionId=ACT-PUB-2001, pageTime=10:16:23, errorToastShown=true, finalUiError=false
+[2026-05-23 12:00:12.001] [INFO] workflow step=confirm-submit, workflowId=WF-PUB-USER-10023, screenshotFile=capture_009.png, pageGroup=User Confirm, displayObject="Zhang San / zhangsan / UID 10023"
+[2026-05-23 12:00:12.002] [INFO] workflow step=manual-submit, workflowId=WF-PUB-USER-10023, actionId=ACT-PUB-4712, trigger=save-button, submitSource=foreground-user-action
+[2026-05-23 12:00:12.003] [INFO] form submit captured, workflowId=WF-PUB-USER-10023, actionId=ACT-PUB-4712, screenshotFile=capture_009.png, pageTime=10:19:26, pageGroup=User Confirm, displayObject="Zhang San / zhangsan / UID 10023"
+[2026-05-23 12:00:12.004] [WARN] client profile workflowId=WF-PUB-USER-10023, actionId=ACT-PUB-4712, adapter=UserEditPayloadAdapter@1.x, serializer=legacy_v1, contractProfile=user-edit-2026.05, loadedBundle=-
+[2026-05-23 12:00:12.080] [INFO] workflow step=request-sending, workflowId=WF-PUB-USER-10023, actionId=ACT-PUB-4712, screenshotFile=capture_010.png, pageGroup=User Submitting, displayObject="Zhang San / zhangsan / UID 10023"
+[2026-05-23 12:00:12.110] [INFO] workflow step=network-request, workflowId=WF-PUB-USER-10023, actionId=ACT-PUB-4712, method=POST, path=/api/user/update
+[2026-05-23 12:00:12.130] [INFO] form submit captured, actionId=ACT-PUB-5814, pageTime=10:19:26, pageGroup=User Edit, displayObject="Li Si / lisi / UID 10024", workflowRole=other-user-operation
+[2026-05-23 12:00:12.131] [ERROR] submit result=FAILED, actionId=ACT-PUB-5814, pageTime=10:19:26, errorToastShown=true, finalUiError=false
+[2026-05-23 12:00:12.150] [INFO] workflow step=validation-returned, workflowId=WF-PUB-USER-10023, actionId=ACT-PUB-4712, screenshotFile=capture_011.png, validationState=rejected
+[2026-05-23 12:00:12.166] [ERROR] submit result=FAILED, workflowId=WF-PUB-USER-10023, actionId=ACT-PUB-4712, pageTime=10:19:26, errorToastShown=true, finalUiError=true, visualCode=REC-P-7K29
+[2026-05-23 12:00:12.167] [INFO] workflow step=visible-failure, workflowId=WF-PUB-USER-10023, actionId=ACT-PUB-4712, screenshotFile=capture_012.png, visualCode=REC-P-7K29
+[2026-05-23 12:00:12.176] [INFO] workflow step=audit-open, workflowId=WF-PUB-USER-10023, actionId=ACT-PUB-4712, screenshotFile=capture_013.png, pageGroup=User Audit, displayObject="Zhang San / zhangsan / UID 10023"
+[2026-05-23 12:00:12.187] [INFO] diagnostic replay captured, actionId=ACT-PUB-4713, retryOf=ACT-PUB-4712, pageTime=10:19:26, submitSource=diagnostic-replay, workflowRole=diagnostic-replay, replayGroup=RUM-PUB-REPLAY-4713, linkedForeground=ACT-PUB-4712
+[2026-05-23 12:00:12.188] [WARN] diagnostic replay profile actionId=ACT-PUB-4713, retryOf=ACT-PUB-4712, adapter=UserEditPayloadAdapter@1.x, serializer=legacy_v1, contractProfile=user-edit-2026.05, loadedBundle=-, replayGroup=RUM-PUB-REPLAY-4713, linkedForeground=ACT-PUB-4712
+[2026-05-23 12:00:12.191] [WARN] diagnostic replay result=FAILED, actionId=ACT-PUB-4713, retryOf=ACT-PUB-4712, pageTime=10:19:27, errorToastShown=true, finalUiError=false, workflowComplete=false, foregroundWorkflow=false, replayGroup=RUM-PUB-REPLAY-4713, linkedForeground=ACT-PUB-4712
+[2026-05-23 12:00:12.219] [INFO] schema prefetch completed, actionId=ACT-PUB-4712-PF, pageTime=10:19:26, pageGroup=Schema Prefetch, displayObject="schema prefetch", result=SUCCESS
