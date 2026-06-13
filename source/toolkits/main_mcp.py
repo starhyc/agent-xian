@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import importlib
 import json
-import sys
 from pathlib import Path
 from typing import Any, Callable
 
@@ -12,10 +11,6 @@ from source.runtime.skill_runtime import get_skill_runtime
 
 TOOLS: dict[str, MCPTool] = {}
 _SOLUTION_SKILLS_LOADED = False
-
-
-def log(msg: str) -> None:
-    print(f"[mcp] {msg}", file=sys.stderr)
 
 
 def register_tool(
@@ -46,30 +41,28 @@ def list_tools() -> list[MCPTool]:
 
 def load_solution_skills() -> None:
     """Initialize contestant-provided SKILL.md packages and MCP-style tools."""
+
     global _SOLUTION_SKILLS_LOADED
     if _SOLUTION_SKILLS_LOADED:
         return
     _SOLUTION_SKILLS_LOADED = True
-    log("Loading solution skills...")
     get_skill_runtime()
     _load_solution_mcp_tools()
-    log("Solution skills loaded.")
 
 
 def _load_solution_mcp_tools() -> None:
     """Load optional contestant MCP-style tools from source/solution/mcp."""
+
     try:
         module = importlib.import_module("source.solution.mcp.contestant_tools")
     except ModuleNotFoundError as exc:
         if exc.name != "source.solution.mcp.contestant_tools":
             raise
-        log("No contestant_tools module found.")
         return
 
     register = getattr(module, "register_tools", None)
     if callable(register):
         register(register_tool=register_tool, object_schema=object_schema)
-        log("Contestant tools registered.")
 
 
 def _json(data: dict[str, Any]) -> str:
@@ -96,7 +89,6 @@ def _json(data: dict[str, Any]) -> str:
     risk="medium",
 )
 def text_read_file(path: str, max_chars: int = 64000) -> str:
-    log(f"Reading file: {path}")
     data = Path(path).read_text(encoding="utf-8")
     if len(data) > max_chars:
         return data[:max_chars] + "\n[truncated]"
@@ -123,10 +115,7 @@ def text_read_file(path: str, max_chars: int = 64000) -> str:
     risk="low",
 )
 def skill_load(name: str, max_chars: int = 20000) -> str:
-    log(f"Loading skill: {name}")
-    result = get_skill_runtime().load_skill(name=name, max_chars=max_chars)
-    log(f"Skill loaded: {name} ({len(result)} chars)")
-    return result
+    return get_skill_runtime().load_skill(name=name, max_chars=max_chars)
 
 
 @register_tool(
@@ -153,10 +142,7 @@ def skill_load(name: str, max_chars: int = 20000) -> str:
     risk="low",
 )
 def skill_read_resource(name: str, path: str, max_chars: int = 12000) -> str:
-    log(f"Reading skill resource: {name}/{path}")
-    result = get_skill_runtime().read_resource(name=name, path=path, max_chars=max_chars)
-    log(f"Resource read: {name}/{path} ({len(result)} chars)")
-    return result
+    return get_skill_runtime().read_resource(name=name, path=path, max_chars=max_chars)
 
 
 @register_tool(
@@ -181,10 +167,7 @@ def skill_read_resource(name: str, path: str, max_chars: int = 12000) -> str:
     risk="medium",
 )
 def skill_run(name: str, arguments: dict[str, Any] | None = None) -> str:
-    log(f"Running skill: {name} with args={arguments}")
-    result = get_skill_runtime().run_skill(name=name, arguments=arguments or {})
-    log(f"Skill completed: {name}")
-    return result
+    return get_skill_runtime().run_skill(name=name, arguments=arguments or {})
 
 
 @register_tool(
@@ -212,7 +195,6 @@ def skill_run(name: str, arguments: dict[str, Any] | None = None) -> str:
     risk="medium",
 )
 def agent_delegate(agent_name: str, task: str, context_text: str = "") -> str:
-    log(f"Delegating to agent: {agent_name}")
     return _json(
         {
             "error": "agent_delegate is executed by the contest runtime.",

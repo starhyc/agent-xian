@@ -1,1 +1,0 @@
-"""Contestant-editable solution package."""

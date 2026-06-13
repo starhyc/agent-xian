@@ -1,7 +1,0 @@
-{
-  "name": "api_tester_agent",
-  "description": "Tests API endpoints by making HTTP requests and validating responses against expected results.",
-  "role": "API Testing Specialist",
-  "entrypoint": "scripts/run.py",
-  "timeout_seconds": 60
-}

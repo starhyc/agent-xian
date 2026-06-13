@@ -161,17 +161,7 @@ class SkillRuntime:
             cwd=str(skill.skill_dir),
             timeout=skill.timeout_seconds,
             check=False,
-            encoding="utf-8",
-            errors="replace",
         )
-        # ��� skill �ű��� stderr ��־
-        sys.stderr.write(f'[skill_runtime] === Running skill: {skill.name} ===')
-        sys.stderr.flush()
-        if completed.stderr:
-            sys.stderr.write(completed.stderr)
-            sys.stderr.flush()
-        sys.stderr.write(f'[skill_runtime] === Skill {skill.name} completed ===')
-        sys.stderr.flush()
         if completed.returncode != 0:
             error = completed.stderr.strip() or completed.stdout.strip()
             raise RuntimeError(f"skill {skill.name} failed with exit code {completed.returncode}: {error}")
