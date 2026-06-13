@@ -1,0 +1,15 @@
+From: 采购运营 <procurement@corp.example>
+To: 王以宁 <wang.yining@corp.example>
+Date: 2026年4月17日
+Subject: PO-2026-0021 催批
+
+这张 PO 日期预计为 2026-04-19，如果今天没有明确审批，我们先不要下单。
+
+--- late reply ---
+
+From: 王以宁 <wang.yining@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 2026年4月25日
+Subject: Re: PO-2026-0021 采购确认
+
+现在确认同意 PO-2026-0021，采购内容 研发观测台席位续展和接口额度包，金额上限 66655 CNY。

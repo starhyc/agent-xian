@@ -1,0 +1,33 @@
+From: 采购运营 <procurement@corp.example>
+To: 陈思澄 <chen.sicheng@corp.example>
+Date: 7/30/2026
+Subject: PO-2026-0003 多项采购确认
+
+清单包括 测试手机、边缘盒子和联调样机。请确认本次审批覆盖哪些采购项。
+
+---
+
+From: 陈思澄 <chen.sicheng@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 2026年7月31日
+Subject: Re: PO-2026-0003 采购确认
+
+测试手机 可以先批，供应商可以按这一项准备。
+
+---
+
+From: 采购运营 <procurement@corp.example>
+To: 陈思澄 <chen.sicheng@corp.example>
+Date: 2026年8月1日
+Subject: 追问：PO-2026-0003 剩余项
+
+那 边缘盒子、联调样机 是否也算在本次批准里？如果没有覆盖，我们先不把整张 PO 关掉。
+
+---
+
+From: 陈思澄 <chen.sicheng@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 2026年8月1日
+Subject: Re: 追问：PO-2026-0003 剩余项
+
+剩余部分等业务补材料后再看，先不要合并到这次确认里。

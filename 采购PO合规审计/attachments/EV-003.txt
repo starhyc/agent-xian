@@ -1,0 +1,6 @@
+From: 赵明澈 <zhao.mingche@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 2026年6月3日
+Subject: Re: PO-2026-0013 采购确认
+
+我看过 PO-2026-0013 的预算和交付必要性，外部暴露面检查、攻击路径复盘和整改复测 可以继续推进，金额按 63193 CNY 控制。采购权限请按制度再核。

@@ -1,0 +1,15 @@
+From: 采购运营 <procurement@corp.example>
+To: 王以宁 <wang.yining@corp.example>
+Date: 2026年4月14日
+Subject: PO-2026-0005 清单请确认
+
+这张 PO 的供应商是 蓝湖终端服务有限公司，清单里有 员工笔记本 12 台、扩展坞和终端资产登记，金额 59731 CNY。请确认是整张 PO 批准，还是只批准其中某一项。
+
+----- forwarded reply -----
+
+From: 王以宁 <wang.yining@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: Apr 15, 2026
+Subject: Re: PO-2026-0005 采购确认
+
+我确认的是整张 PO-2026-0005，不是单项。员工笔记本 12 台、扩展坞和终端资产登记 都在本次批准范围内，金额上限按 59731 CNY。

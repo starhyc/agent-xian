@@ -1,0 +1,6 @@
+From: 王以宁 <wang.yining@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 2026年3月17日
+Subject: Re: PO-2026-0026 采购确认
+
+我批准 PO-2026-0026，供应商 数澜治理顾问有限公司，金额上限 64924 CNY。采购清单按正文所列的 数据目录梳理、指标口径统一和数据质量规则配置 执行。
