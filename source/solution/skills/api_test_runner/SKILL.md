@@ -24,8 +24,14 @@ description: Execute API test cases against a local HTTP service in order via re
 直接 `skill_run`（参数可为空）。脚本会：
 
 1. 读取三份输入文件并先做一次 `/api/debug/reset`（按 packageId 复位运行态，保证可复现）。
-2. 对每个用例，用大模型把自然语言步骤规划成有序的 HTTP 请求列表（含取 token、写接口、最后校验哪一次响应）。
-3. 真实执行请求（自动注入 X-Package-Id、回填 accessToken），并按 `assert` 做确定性断言。
-4. 输出按用例顺序、英文逗号分隔的失败用例 ID。
+2. 对每个用例，用大模型把自然语言步骤规划成有序的 HTTP 请求列表。规划只负责
+   `method/path/query/body`：查询参数(分页、过滤、排序、verbose 等)一律放进 `query`
+   对象（运行器拼成 URL query string，绝不进 path 或 body）；路径参数写进 path。
+3. token 生命周期由运行器接管，不由规划器拼装：每个写接口自动 `POST /api/auth/token`
+   取新 token 注入 `Authorization`，满足“一个 token 只成功写一次”；仅当用例显式要求
+   复用旧 token 校验 401 时，规划器把该写请求标记 `reuse_token=true`。
+4. 真实执行请求（自动注入 X-Package-Id；读接口不发 body、不带 Authorization），并按
+   `assert`（expectedStatus/expectedFields/expectedValues）做确定性断言。
+5. 输出按用例顺序、英文逗号分隔的失败用例 ID。
 
 把输出作为最终答案原样返回，不要改写。

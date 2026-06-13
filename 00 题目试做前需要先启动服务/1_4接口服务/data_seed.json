@@ -1,0 +1,14 @@
+{
+  "users": [
+    {"userId": "U1001", "name": "Alice", "department": "platform", "status": "active", "email": "user1001@example.com", "title": "Engineer", "version": 1},
+    {"userId": "U1002", "name": "Bob", "department": "platform", "status": "active", "email": "user1002@example.com", "title": "Engineer", "version": 1},
+    {"userId": "U1003", "name": "Carol", "department": "platform", "status": "active", "email": "user1003@example.com", "title": "Engineer", "version": 1},
+    {"userId": "U1004", "name": "Dave", "department": "mobile", "status": "active", "email": "user1004@example.com", "title": "Engineer", "version": 1},
+    {"userId": "U1005", "name": "Eve", "department": "mobile", "status": "active", "email": "user1005@example.com", "title": "Engineer", "version": 1},
+    {"userId": "U1008", "name": "Frank", "department": "platform", "status": "active", "email": "user1008@example.com", "title": "Engineer", "version": 1},
+    {"userId": "U1010", "name": "Grace", "department": "platform", "status": "active", "email": "user1010@example.com", "title": "Engineer", "version": 1, "manager": {"userId": "M9001", "name": "ManagerA"}},
+    {"userId": "U3001", "name": "Heidi", "department": "platform", "status": "active", "email": "user3001@example.com", "title": "Engineer", "version": 1},
+    {"userId": "U3002", "name": "Ivan", "department": "platform", "status": "active", "email": "user3002@example.com", "title": "Engineer", "version": 1}
+  ],
+  "notesByUser": {}
+}
