@@ -1,8 +1,12 @@
 from __future__ import annotations
 
+import bz2
+import gzip
 import re
 import sys
+import tarfile
 import tempfile
+import zipfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[5]))
@@ -22,7 +26,13 @@ IMG_SUFFIXES = {".png", ".jpg", ".jpeg", ".bmp", ".gif", ".webp"}
 TEXT_SUFFIXES = {".txt", ".log", ".csv", ".json", ".md", ".tsv", ".xml", ".html", ".ini", ".cfg", ""}
 ARCHIVE_SUFFIXES = {".zip", ".tar", ".gz", ".tgz", ".bz2"}
 
-OCR_PROMPT = "请逐字转写图片中所有可见文本（包括手机号、邮箱、身份证号、API Key、sk- 开头字符串等），原样输出，不要解释。"
+OCR_PROMPT = (
+    "请完整、逐字转写这张图片中所有可见文本，一行一个 token，"
+    "不要遗漏任何一行，不要总结、不要省略、不要用省略号。"
+    "尤其要原样输出每一个手机号、邮箱、身份证号、API Key（sk- 开头字符串）等敏感信息，"
+    "数字和字符必须精确，连续数字之间不要加空格或换行。只输出文本本身，不要任何解释。"
+)
+OCR_MAX_TOKENS = 4096
 
 
 def _count(text, counters):
@@ -40,6 +50,24 @@ def _read_text(path):
     try:
         return data.decode("utf-8")
     except UnicodeDecodeError:
+        return data.decode("utf-8", errors="replace")
+
+
+def _read_compressed(path, suf):
+    # Skip if it is actually a tar/zip archive: extract_all already expanded it.
+    try:
+        if tarfile.is_tarfile(path) or zipfile.is_zipfile(path):
+            return ""
+    except Exception:
+        pass
+    try:
+        raw = path.read_bytes()
+        data = gzip.decompress(raw) if suf == ".gz" else bz2.decompress(raw)
+    except Exception:
+        return ""
+    try:
+        return data.decode("utf-8")
+    except Exception:
         return data.decode("utf-8", errors="replace")
 
 
@@ -69,10 +97,15 @@ def main() -> None:
         suf = f.suffix.lower()
         if suf in IMG_SUFFIXES:
             try:
-                text = ask_with_images(OCR_PROMPT, [f], max_tokens=1200)
+                text = ask_with_images(OCR_PROMPT, [f], max_tokens=OCR_MAX_TOKENS)
             except Exception:
                 text = ""
             _count(text, counters)
+        elif suf in {".gz", ".bz2"}:
+            # Plain single-file compression that extract_all leaves in place
+            # (true .tar/.tar.gz/.zip are already expanded into __extracted dirs).
+            # Decompress and scan so no compressed text is silently skipped.
+            _count(_read_compressed(f, suf), counters)
         elif suf in TEXT_SUFFIXES or suf not in ARCHIVE_SUFFIXES:
             _count(_read_text(f), counters)
 
