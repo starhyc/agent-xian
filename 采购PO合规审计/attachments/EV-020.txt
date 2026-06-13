@@ -1,0 +1,15 @@
+From: 采购运营 <procurement@corp.example>
+To: 陈思澄 <chen.sicheng@corp.example>
+Date: 2026年5月31日
+Subject: PO-2026-0012 清单请确认
+
+这张 PO 的供应商是 会桥活动服务有限公司，清单里有 集中培训场地、讲师差旅和住宿协调，金额 92620 CNY。请确认是整张 PO 批准，还是只批准其中某一项。
+
+----- forwarded reply -----
+
+From: 陈思澄 <chen.sicheng@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: Mon 2026-06-01
+Subject: Re: PO-2026-0012 采购确认
+
+我确认的是整张 PO-2026-0012，不是单项。集中培训场地、讲师差旅和住宿协调 都在本次批准范围内，金额上限按 92620 CNY。

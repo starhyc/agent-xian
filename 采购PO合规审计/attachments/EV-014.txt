@@ -1,0 +1,24 @@
+From: 陈思澄 <chen.sicheng@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 2026年6月8日
+Subject: Re: PO-2026-0029 采购确认
+
+PO-2026-0029 可以采购，金额和供应商按那张单据执行。
+
+---
+
+From: 采购运营 <procurement@corp.example>
+To: 陈思澄 <chen.sicheng@corp.example>
+Date: 2026年6月9日
+Subject: 转挂到 PO-2026-0034
+
+这封是否也覆盖 PO-2026-0034？当前 PO 的供应商是 青植空间服务有限公司，内容是 办公绿植、茶水间维护和空气净化设备巡检。
+
+---
+
+From: 陈思澄 <chen.sicheng@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 2026年6月9日
+Subject: Re: 转挂到 PO-2026-0034
+
+请按原单据编号归档。

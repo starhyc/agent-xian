@@ -1,0 +1,6 @@
+From: 王以宁 <wang.yining@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 2026年9月11日
+Subject: Re: PO-2026-0048 采购确认
+
+同意采购。请按 PO-2026-0048 的完整清单执行：发票工作流和财务系统字段调整。

@@ -1,0 +1,6 @@
+From: 陈思澄 <chen.sicheng@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: Mon 2026-10-05
+Subject: Re: PO-2026-0028 采购确认
+
+棱镜实验硬件有限公司 这张单可以按当前报价执行，实验终端、边缘盒子和机架小型部件 均已看过并批准。

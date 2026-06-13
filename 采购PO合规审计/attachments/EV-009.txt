@@ -1,0 +1,6 @@
+From: 林知远 <lin.zhiyuan@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 6/14/2026
+Subject: Re: PO-2026-0033 采购确认
+
+确认整张 PO 通过。报销流程配置、发票工作流和付款审批表单 都在批准范围内，金额不要超过 73579 CNY。

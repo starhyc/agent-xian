@@ -1,0 +1,6 @@
+From: 林知远 <lin.zhiyuan@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 2026年3月26日
+Subject: Re: PO-2026-0050 采购确认
+
+我批准 PO-2026-0050，供应商 印迹办公补给有限公司，金额上限 61544 CNY。采购清单按正文所列的 打印耗材、会议室白板和文具补给 执行。

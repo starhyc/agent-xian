@@ -1,0 +1,33 @@
+From: 采购运营 <procurement@corp.example>
+To: 王以宁 <wang.yining@corp.example>
+Date: 2026年7月16日
+Subject: PO-2026-0030 审批范围确认
+
+业务希望把 SaaS 账号订阅、团队知识库访问名额和接口额度包 放在同一张 PO，请确认审批范围。
+
+---
+
+From: 王以宁 <wang.yining@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 2026年7月18日
+Subject: Re: PO-2026-0030 采购确认
+
+SaaS 账号订阅 先通过。其他内容暂按待确认处理。
+
+---
+
+From: 采购运营 <procurement@corp.example>
+To: 王以宁 <wang.yining@corp.example>
+Date: 2026年7月20日
+Subject: Re: PO-2026-0030 审批范围确认
+
+我们还缺 团队知识库访问名额、接口额度包 的明确意见，是否可一起批？
+
+---
+
+From: 王以宁 <wang.yining@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 2026年7月20日
+Subject: Re: PO-2026-0030 审批范围确认
+
+这部分另开评估，不放进这封批准。

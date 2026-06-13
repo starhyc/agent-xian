@@ -1,0 +1,6 @@
+From: 王以宁 <wang.yining@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 10/16/2026
+Subject: Re: PO-2026-0025 采购确认
+
+确认整张 PO 通过。AI 治理制度评审和合规流程辅导 都在批准范围内，金额不要超过 63275 CNY。

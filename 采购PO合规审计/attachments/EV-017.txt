@@ -1,0 +1,6 @@
+From: 王以宁 <wang.yining@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 5/15/2026
+Subject: Re: PO-2026-0047 采购确认
+
+确认整张 PO 通过。漏洞扫描、安全基线核验和整改复测 都在批准范围内，金额不要超过 87427 CNY。

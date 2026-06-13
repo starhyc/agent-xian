@@ -1,0 +1,6 @@
+From: 王以宁 <wang.yining@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 6/25/2026
+Subject: Re: PO-2026-0009 采购确认
+
+确认整张 PO 通过。知识库文章整理和帮助中心文案更新 都在批准范围内，金额不要超过 80503 CNY。

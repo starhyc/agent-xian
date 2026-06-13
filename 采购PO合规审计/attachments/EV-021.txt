@@ -1,0 +1,15 @@
+From: 采购运营 <procurement@corp.example>
+To: 王以宁 <wang.yining@corp.example>
+Date: 2026年3月9日
+Subject: PO-2026-0023 活动物料与脚本是否整单批准
+
+桥影创意传播有限公司这张单有两项：品牌活动物料设计、短视频脚本。请确认是否两项都批。
+
+---
+
+From: 王以宁 <wang.yining@corp.example>
+To: 采购运营 <procurement@corp.example>
+Date: 2026年3月10日
+Subject: Re: PO-2026-0023 活动物料与脚本是否整单批准
+
+两项都批。PO-2026-0023 按完整清单推进，金额上限 94351 CNY。

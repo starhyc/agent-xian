@@ -1,0 +1,26 @@
+﻿evidence_id,attachment_id,attachment_type,summary
+IMG-CHAT-00001,ATT-00001,chat_screenshot,uploaded chat transcript image; inspect visible content before use
+IMG-CHAT-00007,ATT-00007,chat_screenshot,uploaded chat transcript text file; inspect visible content before use
+IMG-CHAT-00020,ATT-00020,chat_screenshot,uploaded chat transcript image; inspect visible content before use
+IMG-CHAT-00021,ATT-00021,chat_screenshot,uploaded chat transcript image; inspect visible content before use
+IMG-CHAT-00022,ATT-00022,chat_screenshot,uploaded chat transcript image; inspect visible content before use
+IMG-CHAT-00025,ATT-00025,chat_screenshot,uploaded chat transcript image; inspect visible content before use
+IMG-CMP-00024,ATT-00024,price_comparison,uploaded price comparison image; inspect visible content before use
+IMG-CON-00004,ATT-00004,contract_excerpt,uploaded contract excerpt image; inspect visible content before use
+IMG-CON-00008,ATT-00008,contract_excerpt,uploaded contract excerpt text file; inspect visible content before use
+IMG-CON-00010,ATT-00010,contract_excerpt,uploaded contract excerpt text file; inspect visible content before use
+IMG-CON-00011,ATT-00011,contract_excerpt,uploaded contract excerpt text file; inspect visible content before use
+IMG-CON-00012,ATT-00012,contract_excerpt,uploaded contract excerpt text file; inspect visible content before use
+IMG-CON-00013,ATT-00013,contract_excerpt,uploaded contract excerpt text file; inspect visible content before use
+IMG-CON-00014,ATT-00014,contract_excerpt,uploaded contract excerpt text file; inspect visible content before use
+IMG-CON-00019,ATT-00019,contract_excerpt,uploaded contract excerpt text file; inspect visible content before use
+IMG-INV-00002,ATT-00002,invoice,uploaded invoice image; inspect visible content before use
+IMG-INV-00003,ATT-00003,invoice,uploaded invoice image; inspect visible content before use
+IMG-INV-00005,ATT-00005,invoice,uploaded invoice text file; inspect visible content before use
+IMG-INV-00006,ATT-00006,invoice,uploaded invoice text file; inspect visible content before use
+IMG-INV-00009,ATT-00009,invoice,uploaded invoice text file; inspect visible content before use
+IMG-INV-00015,ATT-00015,invoice,uploaded invoice text file; inspect visible content before use
+IMG-INV-00016,ATT-00016,invoice,uploaded invoice image; inspect visible content before use
+IMG-INV-00017,ATT-00017,invoice,uploaded invoice text file; inspect visible content before use
+IMG-INV-00018,ATT-00018,invoice,uploaded invoice image; inspect visible content before use
+IMG-INV-00023,ATT-00023,invoice,uploaded invoice image; inspect visible content before use
